@@ -16,19 +16,20 @@ var defaultOptions = {
 Captcha = module.exports = function (options) {	
 	if (!options) options = defaultOptions;
 	var captcha = require('ccap')(options);		
+	if (options.attempts) attemps = options.attempts
 
 	return function (req,res,next) {
 		var generated = captcha.get();	
-	  req.session.captcha = {text:generated[TEXT]};
-	  if (options.attempts) attemps = options.attempts
+	  req.session.captcha = {text:generated[TEXT],attempts:0};	  
 	  res.end(generated[BUFF]);		
 	}
 }
 
 Captcha.check = function (req,res,next) {
-	req.session.captcha.attempts = req.session.captcha.attempts+1;
+	console.log(req.session.captcha);
 	if (!req.session.captcha) fail('No captcha found');
-	if (req.session.captcha.attemps > attemps) fail('Too many attemps');
+	req.session.captcha.attempts = req.session.captcha.attempts+1;
+	if (req.session.captcha.attempts > attempts) fail('Too many attemps');
 	if (req.session.captcha.text != req.body.captcha) fail('No Match');		
 	
 	req.session.captcha.valid = true;
