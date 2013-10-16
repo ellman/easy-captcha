@@ -26,18 +26,31 @@ Captcha = module.exports = function (options) {
 }
 
 Captcha.check = function (req,res,next) {
-	console.log(req.session.captcha);
-	if (!req.session.captcha) fail('No captcha found');
+		
+	if (!req.session.captcha) {
+		req.session.captcha = {valid:false, errDesc:"No Captcha",attempts:1};
+		return next();
+	} 
+
 	req.session.captcha.attempts = req.session.captcha.attempts+1;
-	if (req.session.captcha.attempts > attempts) fail('Too many attemps');
-	if (req.session.captcha.text != req.body.captcha) fail('No Match');		
-	
-	req.session.captcha.valid = true;
-	next();
-	
-	function fail (errDesc) {		
-		req.session.captcha = {valid:false, errDesc:errDesc};		
-		return next();	
+
+	if (!req.session.captcha.text) {
+		req.session.captcha.valid = false;
+		req.session.captcha.errDesc = "No Captcha";
+		return next();
+	}	
+
+	if (req.session.captcha.attempts > attempts) {
+		req.session.captcha.valid = false;
+		req.session.captcha.errDesc = "Too many attempts";
+		return next();
 	}
+
+	if (!req.body || req.session.captcha.text != req.body.captcha) {
+		req.session.captcha.valid = false;
+		req.session.captcha.errDesc = "Text did not match";		
+		return next();
+	}	
+	
 }
 
