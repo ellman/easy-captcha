@@ -1,0 +1,20 @@
+{
+  "name": "easy-captcha",
+  "version": "0.0.1",
+  "description": "Easily add captcha to forms",
+  "main": "captcha.js",
+  "keywords": [
+    "captcha"
+  ],
+  "dependencies": {
+    "express": ">3.4.0",
+    "ccap": "0.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Yonatan Ellman",
+  "license": "BSD"
+}
