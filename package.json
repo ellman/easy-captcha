@@ -1,15 +1,21 @@
 {
   "name": "easy-captcha",
-  "version": "0.0.2",
+  "version": "0.1.5",
   "description": "Easily add captcha to forms",
   "main": "captcha.js",
   "keywords": [
-    "captcha"
+    "captcha",
+    "forms"
   ],
-  "dependencies": {
-    "express": ">3.4.0",
-    "ccap": "0.4.1"
+  "engines": {
+    "node": ">=0.8.5"
   },
+  "scripts": {
+    "preinstall": "node make.js",
+    "install": "node-gyp rebuild",
+    "test": "node ./test/main_test.js"
+  },
+  "gypfile": true,
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -13,9 +13,11 @@ var defaultOptions = {
     }*/
 	}
 
-Captcha = module.exports = function (options) {	
+CAP = module.exports = require('./lib/hcap.js');
+
+CAP.generate = function (options) {	
 	if (!options) options = defaultOptions;
-	var captcha = require('ccap')(options);		
+	var captcha = CAP(options);		
 	if (options.attempts) attemps = options.attempts
 
 	return function (req,res,next) {
@@ -25,7 +27,7 @@ Captcha = module.exports = function (options) {
 	}
 }
 
-Captcha.check = function (req,res,next) {
+CAP.check = function (req,res,next) {
 		
 	if (!req.session.captcha) {
 		req.session.captcha = {valid:false, errDesc:"No Captcha",attempts:1};
@@ -46,11 +48,17 @@ Captcha.check = function (req,res,next) {
 		return next();
 	}
 
-	if (!req.body || req.session.captcha.text != req.body.captcha) {
+	var text =(req.body && req.body.captcha) ? req.body.captcha:'NA';
+
+	if (req.session.captcha.text.toLowerCase() != text.toLowerCase()) {
 		req.session.captcha.valid = false;
 		req.session.captcha.errDesc = "Text did not match";		
 		return next();
 	}	
-	
+
+	req.session.captcha.valid = true;
+	req.session.captcha.errDesc = '';
+
+	return next();
 }
 

@@ -1,19 +1,37 @@
 var express = require('express');
-var captcha = require('./captcha');
+var captcha = require('easy-captcha');
 
+//intiate app
 var app = express();
-app.listen(3002);
 
-app.use(express.cookieParser());
-app.use(express.session({secret:'captcha'}));
+app.configure(function(){
+    app.use(express.bodyParser());    
+    //need to use sessions to store the captcha information
+    app.use(express.cookieParser());
+    app.use(express.session({ secret: 'some-secret' }));
+    app.use('/captcha.jpg', captcha.generate());
+    //Choose the path of the captcha image and intiate captcha with options
+});
 
-app.use('/captcha.jpg',captcha({width:256,height:60,offset:40, quality:30,attempts:3}));
+//sample form with the captcha image.
+//the default name for the captcha text is captcha
+app.get('/login', function(req, res, next){
+		var form = ['<form action="/login" method="post">',
+									'<img src="/captcha.jpg"/>',
+								'<input type="text" name="captcha"/></form>'];
+    res.send(form.join('\n'));
+});
 
-app.post('/form', captcha.check, function (req,res,next) {
+//use captcha.check as middleware to check the valid captcha result
+app.post('/login', captcha.check, function (req,res,next) {
 	//returns true is valid - the captcha value must sent in the captch field
 	//the error message is in the errDesc key of the captcha object
-	res.send(req.session.captcha);
+	if (!req.session.captcha.valid) return res.send(401, "Captcha does not match");
+
+	res.send("Captcha matched! Well done :)");
 });
 
 
-    
+app.listen(7001);
+
+   
