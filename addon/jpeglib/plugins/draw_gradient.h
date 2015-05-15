@@ -80,75 +80,75 @@ void _draw_gradient_profile(T *const ptr, const float opacity, const float r,
   switch(profile) {
   case 0: { // linear
     switch(id) { // map the 3 cases
-    case 3: *ptr = (T)((1-opacity)**ptr + opacity*(col0*(1.f-r)+col1*r)); break;
-    case 1: if (r<1) *ptr = (T)((1-opacity*(1-r))**ptr + col0*opacity*(1-r)); break;
-    case 2: if (r>0) *ptr = (T)((1-opacity*r)**ptr + col1*opacity*r); break;
+    case 3: *ptr = (T)((1 - opacity)**ptr + opacity*(col0*(1.f - r) + col1*r)); break;
+    case 1: if (r<1) *ptr = (T)((1 - opacity*(1 - r))**ptr + col0*opacity*(1 - r)); break;
+    case 2: if (r>0) *ptr = (T)((1 - opacity*r)**ptr + col1*opacity*r); break;
     default: break;
     }  break;
   }
   case 1: { // waves
     const float f = (1 - (float)std::cos(4.5f*r*2.f*cimg::PI))/2;
     switch(id) { // map the 3 cases
-    case 3: *ptr = (T)((1-opacity)**ptr + opacity*(col0*(1.f-f)+col1*f)); break;
-    case 1: if (f<1) *ptr = (T)((1-opacity*(1-f))**ptr + col0*opacity*(1-f)); break;
-    case 2: if (f>0) *ptr = (T)((1-opacity*f)**ptr + col1*opacity*f); break;
+    case 3: *ptr = (T)((1 - opacity)**ptr + opacity*(col0*(1.f - f) + col1*f)); break;
+    case 1: if (f<1) *ptr = (T)((1 - opacity*(1 - f))**ptr + col0*opacity*(1 - f)); break;
+    case 2: if (f>0) *ptr = (T)((1 - opacity*f)**ptr + col1*opacity*f); break;
     default: break;
     } break;
   }
   case 2:{ // ring/bar
     const float f = (1 + (float)std::cos(r*2.f*cimg::PI))/2;
     switch(id) { // map the 3 cases
-    case 3: *ptr = (T)((1-opacity)**ptr + opacity*(col0*(1.f-f)+col1*f)); break;
-    case 1: if (f<1) *ptr = (T)((1-opacity*(1-f))**ptr + col0*opacity*(1-f)); break;
-    case 2: if (f>0) *ptr = (T)((1-opacity*f)**ptr + col1*opacity*f); break;
+    case 3: *ptr = (T)((1 - opacity)**ptr + opacity*(col0*(1.f - f) + col1*f)); break;
+    case 1: if (f<1) *ptr = (T)((1 - opacity*(1 - f))**ptr + col0*opacity*(1 - f)); break;
+    case 2: if (f>0) *ptr = (T)((1 - opacity*f)**ptr + col1*opacity*f); break;
     default: break;
     } break;
   }
   case 3: { // exponential
     const float f = 1 - (float)std::exp(-r);
     switch(id) { // map the 3 cases
-    case 3: *ptr = (T)((1-opacity)**ptr + opacity*(col0*(1.f-f)+col1*f)); break;
-    case 1: if (f<1) *ptr = (T)((1-opacity*(1-f))**ptr + col0*opacity*(1-f)); break;
-    case 2: if (f>0) *ptr = (T)((1-opacity*f)**ptr + col1*opacity*f); break;
+    case 3: *ptr = (T)((1 - opacity)**ptr + opacity*(col0*(1.f - f) + col1*f)); break;
+    case 1: if (f<1) *ptr = (T)((1 - opacity*(1 - f))**ptr + col0*opacity*(1 - f)); break;
+    case 2: if (f>0) *ptr = (T)((1 - opacity*f)**ptr + col1*opacity*f); break;
     default: break;
     } break;
   }
   case 4: { // vanishing wave
     const float f = (1 - (float)std::cos(4.5f*r*2.f*cimg::PI))/2, o = r<.9f?(float)std::exp(-.5*r*r*12.f):0;
     switch(id) { // map the 3 cases
-    case 3: if (o>0) *ptr = (T)((1-o)**ptr + o*(col0*(1.f-f)+col1*f)); break;
-    case 1: if (f<1) *ptr = (T)((1-o*(1-f))**ptr + col0*o*(1-f)); break;
-    case 2: if (f>0) *ptr = (T)((1-o*f)**ptr + col1*o*f); break;
+    case 3: if (o>0) *ptr = (T)((1 - o)**ptr + o*(col0*(1.f - f) + col1*f)); break;
+    case 1: if (f<1) *ptr = (T)((1 - o*(1 - f))**ptr + col0*o*(1 - f)); break;
+    case 2: if (f>0) *ptr = (T)((1 - o*f)**ptr + col1*o*f); break;
     default: break;
     } break;
   }
   case 5: { // vanishing ring/bar
     const float f = (1 + (float)std::cos(r*2.f*cimg::PI))/2, o = r<.9?(float)std::exp(-.5*r*r*12.f):0;
     switch(id) { // map the 3 cases
-    case 3: if (o>0) *ptr = (T)((1-o)**ptr + o*(col0*(1.f-f)+col1*f)); break;
-    case 1: if (f<1) *ptr = (T)((1-o*(1-f))**ptr + col0*o*(1-f)); break;
-    case 2: if (f>0) *ptr = (T)((1-o*f)**ptr + col1*o*f); break;
+    case 3: if (o>0) *ptr = (T)((1 - o)**ptr + o*(col0*(1.f - f) + col1*f)); break;
+    case 1: if (f<1) *ptr = (T)((1 - o*(1 - f))**ptr + col0*o*(1 - f)); break;
+    case 2: if (f>0) *ptr = (T)((1 - o*f)**ptr + col1*o*f); break;
     default: break;
     } break;
   }
   case 6: { // diffraction pattern of a circular aperture (Airy function)
-#define myj1(x) (std::sin((x)<3?(x)*2.2/3:(x)-0.8)*std::exp(-std::pow((x)/5.0,1/3.0)))
-    const float a = 10*(float)cimg::PI*r, tmp = a<0.2?.5f:((float)myj1(a)/a), f = 1-4*tmp*tmp;
+#define myj1(x) (std::sin((x)<3?(x)*2.2/3:(x) - 0.8)*std::exp(-std::pow((x)/5.0,1/3.0)))
+    const float a = 10*(float)cimg::PI*r, tmp = a<0.2?.5f:((float)myj1(a)/a), f = 1 - 4*tmp*tmp;
 #undef myj1
     switch(id) { // map the 3 cases
-    case 3: *ptr = (T)((1-opacity)**ptr + opacity*(col0*(1.f-f)+col1*f)); break;
-    case 1: if (f<1) *ptr = (T)((1-opacity*(1-f))**ptr + col0*opacity*(1-f)); break;
-    case 2: if (f>0) *ptr = (T)((1-opacity*f)**ptr + col1*opacity*f); break;
+    case 3: *ptr = (T)((1 - opacity)**ptr + opacity*(col0*(1.f - f) + col1*f)); break;
+    case 1: if (f<1) *ptr = (T)((1 - opacity*(1 - f))**ptr + col0*opacity*(1 - f)); break;
+    case 2: if (f>0) *ptr = (T)((1 - opacity*f)**ptr + col1*opacity*f); break;
     default: break;
     }
     break;
   }
   case 7: { // diffraction pattern of a rectangular function (sinc function)
-    const float a = 10*(float)cimg::PI*r, tmp = a==0?1:(float)std::sin(a)/a, f = 1-tmp*tmp;
+    const float a = 10*(float)cimg::PI*r, tmp = a==0?1:(float)std::sin(a)/a, f = 1 - tmp*tmp;
     switch(id) { // map the 3 cases
-    case 3: *ptr = (T)((1-opacity)**ptr + opacity*(col0*(1.f-f)+col1*f)); break;
-    case 1: if (f<1) *ptr = (T)((1-opacity*(1-f))**ptr + col0*opacity*(1-f)); break;
-    case 2: if (f>0) *ptr = (T)((1-opacity*f)**ptr + col1*opacity*f); break;
+    case 3: *ptr = (T)((1 - opacity)**ptr + opacity*(col0*(1.f - f) + col1*f)); break;
+    case 1: if (f<1) *ptr = (T)((1 - opacity*(1 - f))**ptr + col0*opacity*(1 - f)); break;
+    case 2: if (f>0) *ptr = (T)((1 - opacity*f)**ptr + col1*opacity*f); break;
     default: break;
     } break;
   }
@@ -183,46 +183,65 @@ CImg<T>& draw_gradient(const int x0, const int y0, const int x1, const int y1,
     CImgArgumentException("CImg<%s>::draw_gradient : unknown profile parameter",pixel_type());
     return *this;
   }
-  const float abx = (float)x1-x0, aby = (float)y1-y0, ab2 = abx*abx + aby*aby; // pt A=(x0,y0), B=(x1,y1)
+  const float abx = (float)x1 - x0, aby = (float)y1 - y0, ab2 = abx*abx + aby*aby; // pt A=(x0,y0), B=(x1,y1)
   const tc *pcol0 = color0, *pcol1 = color1;
   T *ptr = data();
 
   switch(shape) {
   case 0: { // linear
     cimg_forC(*this,v) { cimg_forXYZ(*this,x,y,z) { // point M=(x,z)
-      const float amx = (float)x-x0, amy = (float)y-y0, r = cimg::max(0.f,cimg::min(1.f,(amx*abx+amy*aby)/ab2));
+      const float
+        amx = (float)x - x0,
+        amy = (float)y - y0,
+        r = cimg::max(0.f,cimg::min(1.f,(amx*abx + amy*aby)/ab2));
       _draw_gradient_profile(ptr++,opacity,r,pcol0,pcol1,profile);
     } if (pcol0) ++pcol0; if (pcol1) ++pcol1; }} break;
   case 1:{ // radial
     cimg_forC(*this,v) { cimg_forXYZ(*this,x,y,z) {
-      const float amx = (float)x-x0, amy = (float)y-y0, r = cimg::max(0.f,cimg::min(1.f,(amx*amx+amy*amy)/ab2));
+      const float
+        amx = (float)x - x0,
+        amy = (float)y - y0,
+        r = cimg::max(0.f,cimg::min(1.f,(amx*amx + amy*amy)/ab2));
       _draw_gradient_profile(ptr++,opacity,r,pcol0,pcol1,profile);
      } if (pcol0) ++pcol0; if (pcol1) ++pcol1; }} break;
   case 2:{ // radial cone
     cimg_forC(*this,v) { cimg_forXYZ(*this,x,y,z) {
-      const float amx = (float)x-x0, amy = (float)y-y0, r = cimg::max(0.f,cimg::min(1.f,(float)std::sqrt((amx*amx+amy*amy)/ab2)));
+      const float
+        amx = (float)x - x0,
+        amy = (float)y - y0,
+        r = cimg::max(0.f,cimg::min(1.f,(float)std::sqrt((amx*amx + amy*amy)/ab2)));
       _draw_gradient_profile(ptr++,opacity,r,pcol0,pcol1,profile);
     } if (pcol0) ++pcol0; if (pcol1) ++pcol1; }} break;
   case 3:{ // square
     cimg_forC(*this,v) { cimg_forXYZ(*this,x,y,z) {
-      const float amx = (float)x-x0, amy = (float)y-y0, r=cimg::max(0.f,cimg::min(1.f,(cimg::abs(amx*abx+amy*aby)+cimg::abs(amx*aby-amy*abx))/ab2));
+      const float
+        amx = (float)x - x0,
+        amy = (float)y - y0,
+        r=cimg::max(0.f,cimg::min(1.f,(cimg::abs(amx*abx + amy*aby) + cimg::abs(amx*aby - amy*abx))/ab2));
       _draw_gradient_profile(ptr++,opacity,r,pcol0,pcol1,profile);
     } if (pcol0) ++pcol0; if (pcol1) ++pcol1; }} break;
   case 4:{ // rectangle (L1)
     cimg_forC(*this,v) { cimg_forXYZ(*this,x,y,z) {
-      const float amx = (float)x-x0, amy = (float)y-y0,
-        r = cimg::max(0.f,cimg::min(1.f,(cimg::abs(amx/abx)+cimg::abs(amy/aby))));
+      const float
+        amx = (float)x - x0,
+        amy = (float)y - y0,
+        r = cimg::max(0.f,cimg::min(1.f,(cimg::abs(amx/abx) + cimg::abs(amy/aby))));
       _draw_gradient_profile(ptr++,opacity,r,pcol0,pcol1,profile);
     } if (pcol0) ++pcol0; if (pcol1) ++pcol1; }} break;
    case 5:{ // rectangle (Linf)
     cimg_forC(*this,v) { cimg_forXYZ(*this,x,y,z) {
-      const float amx = (float)x-x0, amy = (float)y-y0,
+      const float
+        amx = (float)x - x0,
+        amy = (float)y - y0,
         r=cimg::max(0.f,cimg::min(1.f,cimg::max(cimg::abs(amx/abx),cimg::abs(amy/aby))));
       _draw_gradient_profile(ptr++,opacity,r,pcol0,pcol1,profile);
     } if (pcol0) ++pcol0; if (pcol1) ++pcol1; }} break;
   case 6:{ // gaussian
     cimg_forC(*this,v) { cimg_forXYZ(*this,x,y,z) {
-      const float amx = (float)x-x0, amy = (float)y-y0, r = cimg::max(0.f,cimg::min(1.f,1-(float)std::exp(-(amx*amx+amy*amy)/ab2)));
+      const float
+        amx = (float)x - x0,
+        amy = (float)y - y0,
+        r = cimg::max(0.f,cimg::min(1.f,1 - (float)std::exp(-(amx*amx + amy*amy)/ab2)));
       _draw_gradient_profile(ptr++,opacity,r,pcol0,pcol1,profile);
     } if (pcol0) ++pcol0; if (pcol1) ++pcol1; }} break;
   default:
@@ -235,14 +254,16 @@ template<typename tc>
 CImg<T>& draw_gradient(const int x0, const int y0, const int x1, const int y1,
                        const tc *const color0, const int color1,
                        const int shape=0, const int profile=0, const float opacity=1.0f) {
-  return (*this).draw_gradient(x0,y0,x1,y1,color0,(tc*)color1,shape,profile,opacity);
+  cimg::unused(color1);
+  return (*this).draw_gradient(x0,y0,x1,y1,color0,(tc*)0,shape,profile,opacity);
 }
 
 template<typename tc>
 CImg<T>& draw_gradient(const int x0, const int y0, const int x1, const int y1,
                        const int color0, const tc *const color1,
                        const int shape=0, const int profile=0, const float opacity=1.0f) {
-  return (*this).draw_gradient(x0,y0,x1,y1,(tc*)color0,color1,shape,profile,opacity);
+  cimg::unused(color0);
+  return (*this).draw_gradient(x0,y0,x1,y1,(tc*)0,color1,shape,profile,opacity);
 }
 
-#endif
+#endif /* cimg_draw_gradient */

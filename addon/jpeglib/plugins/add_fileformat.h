@@ -76,4 +76,4 @@ const CImg& save_foo(const char *filename) const {
 
 // End of the plugin.
 //-------------------
-#endif
+#endif /* cimg_plugin_addfileformat */

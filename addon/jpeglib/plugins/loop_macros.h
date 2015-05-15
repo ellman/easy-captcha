@@ -52,11 +52,11 @@
 //-------------------------
 #define cimg_for10(bound,i) for (int i = 0, \
  _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5; \
  _n5##i<(int)(bound) || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -78,15 +78,15 @@
 #define cimg_for10XYZC(img,x,y,z,c) cimg_for10C(img,c) cimg_for10XYZ(img,x,y,z)
 
 #define cimg_for_in10(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5; \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5; \
  i<=(int)(i1) && (_n5##i<(int)(bound) || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -110,10 +110,10 @@
 #define cimg_for10x10(img,x,y,z,c,I,T) \
  cimg_for10((img)._height,y) for (int x = 0, \
  _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
  _n5##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = (T)(img)(0,_p4##y,z,c)), \
  (I[10] = I[11] = I[12] = I[13] = I[14] = (T)(img)(0,_p3##y,z,c)), \
@@ -165,7 +165,7 @@
  (I[78] = (T)(img)(_n4##x,_n3##y,z,c)), \
  (I[88] = (T)(img)(_n4##x,_n4##y,z,c)), \
  (I[98] = (T)(img)(_n4##x,_n5##y,z,c)), \
- 5>=((img)._width)?(img).width()-1:5); \
+ 5>=((img)._width)?(img).width() - 1:5); \
  (_n5##x<(img).width() && ( \
  (I[9] = (T)(img)(_n5##x,_p4##y,z,c)), \
  (I[19] = (T)(img)(_n5##x,_p3##y,z,c)), \
@@ -192,14 +192,14 @@
 
 #define cimg_for_in10x10(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in10((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
  _n5##x = (int)( \
  (I[0] = (T)(img)(_p4##x,_p4##y,z,c)), \
  (I[10] = (T)(img)(_p4##x,_p3##y,z,c)), \
@@ -291,7 +291,7 @@
  (I[78] = (T)(img)(_n4##x,_n3##y,z,c)), \
  (I[88] = (T)(img)(_n4##x,_n4##y,z,c)), \
  (I[98] = (T)(img)(_n4##x,_n5##y,z,c)), \
- x+5>=(img).width()?(img).width()-1:x+5); \
+ x + 5>=(img).width()?(img).width() - 1:x + 5); \
  x<=(int)(x1) && ((_n5##x<(img).width() && ( \
  (I[9] = (T)(img)(_n5##x,_p4##y,z,c)), \
  (I[19] = (T)(img)(_n5##x,_p3##y,z,c)), \
@@ -332,11 +332,11 @@
 //-------------------------
 #define cimg_for11(bound,i) for (int i = 0, \
  _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5; \
  _n5##i<(int)(bound) || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -358,16 +358,16 @@
 #define cimg_for11XYZC(img,x,y,z,c) cimg_for11C(img,c) cimg_for11XYZ(img,x,y,z)
 
 #define cimg_for_in11(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5; \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5; \
  i<=(int)(i1) && (_n5##i<(int)(bound) || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -391,10 +391,10 @@
 #define cimg_for11x11(img,x,y,z,c,I,T) \
  cimg_for11((img)._height,y) for (int x = 0, \
  _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
  _n5##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = (T)(img)(0,_p5##y,z,c)), \
  (I[11] = I[12] = I[13] = I[14] = I[15] = I[16] = (T)(img)(0,_p4##y,z,c)), \
@@ -451,7 +451,7 @@
  (I[97] = (T)(img)(_n4##x,_n3##y,z,c)), \
  (I[108] = (T)(img)(_n4##x,_n4##y,z,c)), \
  (I[119] = (T)(img)(_n4##x,_n5##y,z,c)), \
- 5>=((img)._width)?(img).width()-1:5); \
+ 5>=((img)._width)?(img).width() - 1:5); \
  (_n5##x<(img).width() && ( \
  (I[10] = (T)(img)(_n5##x,_p5##y,z,c)), \
  (I[21] = (T)(img)(_n5##x,_p4##y,z,c)), \
@@ -480,15 +480,15 @@
 
 #define cimg_for_in11x11(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in11((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
  _n5##x = (int)( \
  (I[0] = (T)(img)(_p5##x,_p5##y,z,c)), \
  (I[11] = (T)(img)(_p5##x,_p4##y,z,c)), \
@@ -600,7 +600,7 @@
  (I[97] = (T)(img)(_n4##x,_n3##y,z,c)), \
  (I[108] = (T)(img)(_n4##x,_n4##y,z,c)), \
  (I[119] = (T)(img)(_n4##x,_n5##y,z,c)), \
- x+5>=(img).width()?(img).width()-1:x+5); \
+ x + 5>=(img).width()?(img).width() - 1:x + 5); \
  x<=(int)(x1) && ((_n5##x<(img).width() && ( \
  (I[10] = (T)(img)(_n5##x,_p5##y,z,c)), \
  (I[21] = (T)(img)(_n5##x,_p4##y,z,c)), \
@@ -644,12 +644,12 @@
 //-------------------------
 #define cimg_for12(bound,i) for (int i = 0, \
  _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6; \
  _n6##i<(int)(bound) || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -671,17 +671,17 @@
 #define cimg_for12XYZC(img,x,y,z,c) cimg_for12C(img,c) cimg_for12XYZ(img,x,y,z)
 
 #define cimg_for_in12(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6; \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6; \
  i<=(int)(i1) && (_n6##i<(int)(bound) || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -705,11 +705,11 @@
 #define cimg_for12x12(img,x,y,z,c,I,T) \
  cimg_for12((img)._height,y) for (int x = 0, \
  _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
  _n6##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = (T)(img)(0,_p5##y,z,c)), \
  (I[12] = I[13] = I[14] = I[15] = I[16] = I[17] = (T)(img)(0,_p4##y,z,c)), \
@@ -783,7 +783,7 @@
  (I[118] = (T)(img)(_n5##x,_n4##y,z,c)), \
  (I[130] = (T)(img)(_n5##x,_n5##y,z,c)), \
  (I[142] = (T)(img)(_n5##x,_n6##y,z,c)), \
- 6>=((img)._width)?(img).width()-1:6); \
+ 6>=((img)._width)?(img).width() - 1:6); \
  (_n6##x<(img).width() && ( \
  (I[11] = (T)(img)(_n6##x,_p5##y,z,c)), \
  (I[23] = (T)(img)(_n6##x,_p4##y,z,c)), \
@@ -814,16 +814,16 @@
 
 #define cimg_for_in12x12(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in12((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
  _n6##x = (int)( \
  (I[0] = (T)(img)(_p5##x,_p5##y,z,c)), \
  (I[12] = (T)(img)(_p5##x,_p4##y,z,c)), \
@@ -957,7 +957,7 @@
  (I[118] = (T)(img)(_n5##x,_n4##y,z,c)), \
  (I[130] = (T)(img)(_n5##x,_n5##y,z,c)), \
  (I[142] = (T)(img)(_n5##x,_n6##y,z,c)), \
- x+6>=(img).width()?(img).width()-1:x+6); \
+ x + 6>=(img).width()?(img).width() - 1:x + 6); \
  x<=(int)(x1) && ((_n6##x<(img).width() && ( \
  (I[11] = (T)(img)(_n6##x,_p5##y,z,c)), \
  (I[23] = (T)(img)(_n6##x,_p4##y,z,c)), \
@@ -1004,12 +1004,12 @@
 //-------------------------
 #define cimg_for13(bound,i) for (int i = 0, \
  _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6; \
  _n6##i<(int)(bound) || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -1031,18 +1031,18 @@
 #define cimg_for13XYZC(img,x,y,z,c) cimg_for13C(img,c) cimg_for13XYZ(img,x,y,z)
 
 #define cimg_for_in13(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6; \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6; \
  i<=(int)(i1) && (_n6##i<(int)(bound) || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -1066,11 +1066,11 @@
 #define cimg_for13x13(img,x,y,z,c,I,T) \
  cimg_for13((img)._height,y) for (int x = 0, \
  _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
  _n6##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = (T)(img)(0,_p6##y,z,c)), \
  (I[13] = I[14] = I[15] = I[16] = I[17] = I[18] = I[19] = (T)(img)(0,_p5##y,z,c)), \
@@ -1150,7 +1150,7 @@
  (I[141] = (T)(img)(_n5##x,_n4##y,z,c)), \
  (I[154] = (T)(img)(_n5##x,_n5##y,z,c)), \
  (I[167] = (T)(img)(_n5##x,_n6##y,z,c)), \
- 6>=((img)._width)?(img).width()-1:6); \
+ 6>=((img)._width)?(img).width() - 1:6); \
  (_n6##x<(img).width() && ( \
  (I[12] = (T)(img)(_n6##x,_p6##y,z,c)), \
  (I[25] = (T)(img)(_n6##x,_p5##y,z,c)), \
@@ -1183,17 +1183,17 @@
 
 #define cimg_for_in13x13(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in13((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
  _n6##x = (int)( \
  (I[0] = (T)(img)(_p6##x,_p6##y,z,c)), \
  (I[13] = (T)(img)(_p6##x,_p5##y,z,c)), \
@@ -1351,7 +1351,7 @@
  (I[141] = (T)(img)(_n5##x,_n4##y,z,c)), \
  (I[154] = (T)(img)(_n5##x,_n5##y,z,c)), \
  (I[167] = (T)(img)(_n5##x,_n6##y,z,c)), \
- x+6>=(img).width()?(img).width()-1:x+6); \
+ x + 6>=(img).width()?(img).width() - 1:x + 6); \
  x<=(int)(x1) && ((_n6##x<(img).width() && ( \
  (I[12] = (T)(img)(_n6##x,_p6##y,z,c)), \
  (I[25] = (T)(img)(_n6##x,_p5##y,z,c)), \
@@ -1401,13 +1401,13 @@
 //-------------------------
 #define cimg_for14(bound,i) for (int i = 0, \
  _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7; \
  _n7##i<(int)(bound) || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -1429,19 +1429,19 @@
 #define cimg_for14XYZC(img,x,y,z,c) cimg_for14C(img,c) cimg_for14XYZ(img,x,y,z)
 
 #define cimg_for_in14(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7; \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7; \
  i<=(int)(i1) && (_n7##i<(int)(bound) || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -1465,12 +1465,12 @@
 #define cimg_for14x14(img,x,y,z,c,I,T) \
  cimg_for14((img)._height,y) for (int x = 0, \
  _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
  _n7##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = (T)(img)(0,_p6##y,z,c)), \
  (I[14] = I[15] = I[16] = I[17] = I[18] = I[19] = I[20] = (T)(img)(0,_p5##y,z,c)), \
@@ -1570,7 +1570,7 @@
  (I[166] = (T)(img)(_n6##x,_n5##y,z,c)), \
  (I[180] = (T)(img)(_n6##x,_n6##y,z,c)), \
  (I[194] = (T)(img)(_n6##x,_n7##y,z,c)), \
- 7>=((img)._width)?(img).width()-1:7); \
+ 7>=((img)._width)?(img).width() - 1:7); \
  (_n7##x<(img).width() && ( \
  (I[13] = (T)(img)(_n7##x,_p6##y,z,c)), \
  (I[27] = (T)(img)(_n7##x,_p5##y,z,c)), \
@@ -1605,18 +1605,18 @@
 
 #define cimg_for_in14x14(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in14((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
  _n7##x = (int)( \
  (I[0] = (T)(img)(_p6##x,_p6##y,z,c)), \
  (I[14] = (T)(img)(_p6##x,_p5##y,z,c)), \
@@ -1800,7 +1800,7 @@
  (I[166] = (T)(img)(_n6##x,_n5##y,z,c)), \
  (I[180] = (T)(img)(_n6##x,_n6##y,z,c)), \
  (I[194] = (T)(img)(_n6##x,_n7##y,z,c)), \
- x+7>=(img).width()?(img).width()-1:x+7); \
+ x + 7>=(img).width()?(img).width() - 1:x + 7); \
  x<=(int)(x1) && ((_n7##x<(img).width() && ( \
  (I[13] = (T)(img)(_n7##x,_p6##y,z,c)), \
  (I[27] = (T)(img)(_n7##x,_p5##y,z,c)), \
@@ -1853,13 +1853,13 @@
 //-------------------------
 #define cimg_for15(bound,i) for (int i = 0, \
  _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7; \
  _n7##i<(int)(bound) || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -1881,20 +1881,20 @@
 #define cimg_for15XYZC(img,x,y,z,c) cimg_for15C(img,c) cimg_for15XYZ(img,x,y,z)
 
 #define cimg_for_in15(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7; \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7; \
  i<=(int)(i1) && (_n7##i<(int)(bound) || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -1918,12 +1918,12 @@
 #define cimg_for15x15(img,x,y,z,c,I,T) \
  cimg_for15((img)._height,y) for (int x = 0, \
  _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
  _n7##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = (T)(img)(0,_p7##y,z,c)), \
  (I[15] = I[16] = I[17] = I[18] = I[19] = I[20] = I[21] = I[22] = (T)(img)(0,_p6##y,z,c)), \
@@ -2030,7 +2030,7 @@
  (I[193] = (T)(img)(_n6##x,_n5##y,z,c)), \
  (I[208] = (T)(img)(_n6##x,_n6##y,z,c)), \
  (I[223] = (T)(img)(_n6##x,_n7##y,z,c)), \
- 7>=((img)._width)?(img).width()-1:7); \
+ 7>=((img)._width)?(img).width() - 1:7); \
  (_n7##x<(img).width() && ( \
  (I[14] = (T)(img)(_n7##x,_p7##y,z,c)), \
  (I[29] = (T)(img)(_n7##x,_p6##y,z,c)), \
@@ -2067,19 +2067,19 @@
 
 #define cimg_for_in15x15(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in15((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
  _n7##x = (int)( \
  (I[0] = (T)(img)(_p7##x,_p7##y,z,c)), \
  (I[15] = (T)(img)(_p7##x,_p6##y,z,c)), \
@@ -2291,7 +2291,7 @@
  (I[193] = (T)(img)(_n6##x,_n5##y,z,c)), \
  (I[208] = (T)(img)(_n6##x,_n6##y,z,c)), \
  (I[223] = (T)(img)(_n6##x,_n7##y,z,c)), \
- x+7>=(img).width()?(img).width()-1:x+7); \
+ x + 7>=(img).width()?(img).width() - 1:x + 7); \
  x<=(int)(x1) && ((_n7##x<(img).width() && ( \
  (I[14] = (T)(img)(_n7##x,_p7##y,z,c)), \
  (I[29] = (T)(img)(_n7##x,_p6##y,z,c)), \
@@ -2347,14 +2347,14 @@
 //-------------------------
 #define cimg_for16(bound,i) for (int i = 0, \
  _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8; \
  _n8##i<(int)(bound) || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -2376,21 +2376,21 @@
 #define cimg_for16XYZC(img,x,y,z,c) cimg_for16C(img,c) cimg_for16XYZ(img,x,y,z)
 
 #define cimg_for_in16(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8; \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8; \
  i<=(int)(i1) && (_n8##i<(int)(bound) || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -2414,13 +2414,13 @@
 #define cimg_for16x16(img,x,y,z,c,I,T) \
  cimg_for16((img)._height,y) for (int x = 0, \
  _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
  _n8##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = (T)(img)(0,_p7##y,z,c)), \
  (I[16] = I[17] = I[18] = I[19] = I[20] = I[21] = I[22] = I[23] = (T)(img)(0,_p6##y,z,c)), \
@@ -2550,7 +2550,7 @@
  (I[222] = (T)(img)(_n7##x,_n6##y,z,c)), \
  (I[238] = (T)(img)(_n7##x,_n7##y,z,c)), \
  (I[254] = (T)(img)(_n7##x,_n8##y,z,c)), \
- 8>=((img)._width)?(img).width()-1:8); \
+ 8>=((img)._width)?(img).width() - 1:8); \
  (_n8##x<(img).width() && ( \
  (I[15] = (T)(img)(_n8##x,_p7##y,z,c)), \
  (I[31] = (T)(img)(_n8##x,_p6##y,z,c)), \
@@ -2589,20 +2589,20 @@
 
 #define cimg_for_in16x16(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in16((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
  _n8##x = (int)( \
  (I[0] = (T)(img)(_p7##x,_p7##y,z,c)), \
  (I[16] = (T)(img)(_p7##x,_p6##y,z,c)), \
@@ -2844,7 +2844,7 @@
  (I[222] = (T)(img)(_n7##x,_n6##y,z,c)), \
  (I[238] = (T)(img)(_n7##x,_n7##y,z,c)), \
  (I[254] = (T)(img)(_n7##x,_n8##y,z,c)), \
- x+8>=(img).width()?(img).width()-1:x+8); \
+ x + 8>=(img).width()?(img).width() - 1:x + 8); \
  x<=(int)(x1) && ((_n8##x<(img).width() && ( \
  (I[15] = (T)(img)(_n8##x,_p7##y,z,c)), \
  (I[31] = (T)(img)(_n8##x,_p6##y,z,c)), \
@@ -2903,14 +2903,14 @@
 //-------------------------
 #define cimg_for17(bound,i) for (int i = 0, \
  _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8; \
  _n8##i<(int)(bound) || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -2932,22 +2932,22 @@
 #define cimg_for17XYZC(img,x,y,z,c) cimg_for17C(img,c) cimg_for17XYZ(img,x,y,z)
 
 #define cimg_for_in17(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8; \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8; \
  i<=(int)(i1) && (_n8##i<(int)(bound) || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -2971,13 +2971,13 @@
 #define cimg_for17x17(img,x,y,z,c,I,T) \
  cimg_for17((img)._height,y) for (int x = 0, \
  _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
  _n8##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = (T)(img)(0,_p8##y,z,c)), \
  (I[17] = I[18] = I[19] = I[20] = I[21] = I[22] = I[23] = I[24] = I[25] = (T)(img)(0,_p7##y,z,c)), \
@@ -3115,7 +3115,7 @@
  (I[253] = (T)(img)(_n7##x,_n6##y,z,c)), \
  (I[270] = (T)(img)(_n7##x,_n7##y,z,c)), \
  (I[287] = (T)(img)(_n7##x,_n8##y,z,c)), \
- 8>=((img)._width)?(img).width()-1:8); \
+ 8>=((img)._width)?(img).width() - 1:8); \
  (_n8##x<(img).width() && ( \
  (I[16] = (T)(img)(_n8##x,_p8##y,z,c)), \
  (I[33] = (T)(img)(_n8##x,_p7##y,z,c)), \
@@ -3156,21 +3156,21 @@
 
 #define cimg_for_in17x17(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in17((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
  _n8##x = (int)( \
  (I[0] = (T)(img)(_p8##x,_p8##y,z,c)), \
  (I[17] = (T)(img)(_p8##x,_p7##y,z,c)), \
@@ -3444,7 +3444,7 @@
  (I[253] = (T)(img)(_n7##x,_n6##y,z,c)), \
  (I[270] = (T)(img)(_n7##x,_n7##y,z,c)), \
  (I[287] = (T)(img)(_n7##x,_n8##y,z,c)), \
- x+8>=(img).width()?(img).width()-1:x+8); \
+ x + 8>=(img).width()?(img).width() - 1:x + 8); \
  x<=(int)(x1) && ((_n8##x<(img).width() && ( \
  (I[16] = (T)(img)(_n8##x,_p8##y,z,c)), \
  (I[33] = (T)(img)(_n8##x,_p7##y,z,c)), \
@@ -3506,15 +3506,15 @@
 //-------------------------
 #define cimg_for18(bound,i) for (int i = 0, \
  _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9; \
  _n9##i<(int)(bound) || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -3536,23 +3536,23 @@
 #define cimg_for18XYZC(img,x,y,z,c) cimg_for18C(img,c) cimg_for18XYZ(img,x,y,z)
 
 #define cimg_for_in18(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9; \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9; \
  i<=(int)(i1) && (_n9##i<(int)(bound) || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -3576,14 +3576,14 @@
 #define cimg_for18x18(img,x,y,z,c,I,T) \
  cimg_for18((img)._height,y) for (int x = 0, \
  _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
  _n9##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = (T)(img)(0,_p8##y,z,c)), \
  (I[18] = I[19] = I[20] = I[21] = I[22] = I[23] = I[24] = I[25] = I[26] = (T)(img)(0,_p7##y,z,c)), \
@@ -3747,7 +3747,7 @@
  (I[286] = (T)(img)(_n8##x,_n7##y,z,c)), \
  (I[304] = (T)(img)(_n8##x,_n8##y,z,c)), \
  (I[322] = (T)(img)(_n8##x,_n9##y,z,c)), \
- 9>=((img)._width)?(img).width()-1:9); \
+ 9>=((img)._width)?(img).width() - 1:9); \
  (_n9##x<(img).width() && ( \
  (I[17] = (T)(img)(_n9##x,_p8##y,z,c)), \
  (I[35] = (T)(img)(_n9##x,_p7##y,z,c)), \
@@ -3790,22 +3790,22 @@
 
 #define cimg_for_in18x18(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in18((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
  _n9##x = (int)( \
  (I[0] = (T)(img)(_p8##x,_p8##y,z,c)), \
  (I[18] = (T)(img)(_p8##x,_p7##y,z,c)), \
@@ -4113,7 +4113,7 @@
  (I[286] = (T)(img)(_n8##x,_n7##y,z,c)), \
  (I[304] = (T)(img)(_n8##x,_n8##y,z,c)), \
  (I[322] = (T)(img)(_n8##x,_n9##y,z,c)), \
- x+9>=(img).width()?(img).width()-1:x+9); \
+ x + 9>=(img).width()?(img).width() - 1:x + 9); \
  x<=(int)(x1) && ((_n9##x<(img).width() && ( \
  (I[17] = (T)(img)(_n9##x,_p8##y,z,c)), \
  (I[35] = (T)(img)(_n9##x,_p7##y,z,c)), \
@@ -4178,15 +4178,15 @@
 //-------------------------
 #define cimg_for19(bound,i) for (int i = 0, \
  _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9; \
  _n9##i<(int)(bound) || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -4208,24 +4208,24 @@
 #define cimg_for19XYZC(img,x,y,z,c) cimg_for19C(img,c) cimg_for19XYZ(img,x,y,z)
 
 #define cimg_for_in19(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9; \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9; \
  i<=(int)(i1) && (_n9##i<(int)(bound) || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -4249,14 +4249,14 @@
 #define cimg_for19x19(img,x,y,z,c,I,T) \
  cimg_for19((img)._height,y) for (int x = 0, \
  _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
  _n9##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = (T)(img)(0,_p9##y,z,c)), \
  (I[19] = I[20] = I[21] = I[22] = I[23] = I[24] = I[25] = I[26] = I[27] = I[28] = (T)(img)(0,_p8##y,z,c)), \
@@ -4429,7 +4429,7 @@
  (I[321] = (T)(img)(_n8##x,_n7##y,z,c)), \
  (I[340] = (T)(img)(_n8##x,_n8##y,z,c)), \
  (I[359] = (T)(img)(_n8##x,_n9##y,z,c)), \
- 9>=((img)._width)?(img).width()-1:9); \
+ 9>=((img)._width)?(img).width() - 1:9); \
  (_n9##x<(img).width() && ( \
  (I[18] = (T)(img)(_n9##x,_p9##y,z,c)), \
  (I[37] = (T)(img)(_n9##x,_p8##y,z,c)), \
@@ -4474,23 +4474,23 @@
 
 #define cimg_for_in19x19(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in19((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
  _n9##x = (int)( \
  (I[0] = (T)(img)(_p9##x,_p9##y,z,c)), \
  (I[19] = (T)(img)(_p9##x,_p8##y,z,c)), \
@@ -4834,7 +4834,7 @@
  (I[321] = (T)(img)(_n8##x,_n7##y,z,c)), \
  (I[340] = (T)(img)(_n8##x,_n8##y,z,c)), \
  (I[359] = (T)(img)(_n8##x,_n9##y,z,c)), \
- x+9>=(img).width()?(img).width()-1:x+9); \
+ x + 9>=(img).width()?(img).width() - 1:x + 9); \
  x<=(int)(x1) && ((_n9##x<(img).width() && ( \
  (I[18] = (T)(img)(_n9##x,_p9##y,z,c)), \
  (I[37] = (T)(img)(_n9##x,_p8##y,z,c)), \
@@ -4902,16 +4902,16 @@
 //-------------------------
 #define cimg_for20(bound,i) for (int i = 0, \
  _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10; \
  _n10##i<(int)(bound) || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -4933,25 +4933,25 @@
 #define cimg_for20XYZC(img,x,y,z,c) cimg_for20C(img,c) cimg_for20XYZ(img,x,y,z)
 
 #define cimg_for_in20(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10; \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10; \
  i<=(int)(i1) && (_n10##i<(int)(bound) || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -4975,15 +4975,15 @@
 #define cimg_for20x20(img,x,y,z,c,I,T) \
  cimg_for20((img)._height,y) for (int x = 0, \
  _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
  _n10##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = (T)(img)(0,_p9##y,z,c)), \
  (I[20] = I[21] = I[22] = I[23] = I[24] = I[25] = I[26] = I[27] = I[28] = I[29] = (T)(img)(0,_p8##y,z,c)), \
@@ -5185,7 +5185,7 @@
  (I[358] = (T)(img)(_n9##x,_n8##y,z,c)), \
  (I[378] = (T)(img)(_n9##x,_n9##y,z,c)), \
  (I[398] = (T)(img)(_n9##x,_n10##y,z,c)), \
- 10>=((img)._width)?(img).width()-1:10); \
+ 10>=((img)._width)?(img).width() - 1:10); \
  (_n10##x<(img).width() && ( \
  (I[19] = (T)(img)(_n10##x,_p9##y,z,c)), \
  (I[39] = (T)(img)(_n10##x,_p8##y,z,c)), \
@@ -5232,24 +5232,24 @@
 
 #define cimg_for_in20x20(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in20((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
  _n10##x = (int)( \
  (I[0] = (T)(img)(_p9##x,_p9##y,z,c)), \
  (I[20] = (T)(img)(_p9##x,_p8##y,z,c)), \
@@ -5631,7 +5631,7 @@
  (I[358] = (T)(img)(_n9##x,_n8##y,z,c)), \
  (I[378] = (T)(img)(_n9##x,_n9##y,z,c)), \
  (I[398] = (T)(img)(_n9##x,_n10##y,z,c)), \
- x+10>=(img).width()?(img).width()-1:x+10); \
+ x + 10>=(img).width()?(img).width() - 1:x + 10); \
  x<=(int)(x1) && ((_n10##x<(img).width() && ( \
  (I[19] = (T)(img)(_n10##x,_p9##y,z,c)), \
  (I[39] = (T)(img)(_n10##x,_p8##y,z,c)), \
@@ -5702,16 +5702,16 @@
 //-------------------------
 #define cimg_for21(bound,i) for (int i = 0, \
  _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10; \
  _n10##i<(int)(bound) || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -5733,26 +5733,26 @@
 #define cimg_for21XYZC(img,x,y,z,c) cimg_for21C(img,c) cimg_for21XYZ(img,x,y,z)
 
 #define cimg_for_in21(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10; \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10; \
  i<=(int)(i1) && (_n10##i<(int)(bound) || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -5776,15 +5776,15 @@
 #define cimg_for21x21(img,x,y,z,c,I,T) \
  cimg_for21((img)._height,y) for (int x = 0, \
  _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
  _n10##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = (T)(img)(0,_p10##y,z,c)), \
  (I[21] = I[22] = I[23] = I[24] = I[25] = I[26] = I[27] = I[28] = I[29] = I[30] = I[31] = (T)(img)(0,_p9##y,z,c)), \
@@ -5996,7 +5996,7 @@
  (I[397] = (T)(img)(_n9##x,_n8##y,z,c)), \
  (I[418] = (T)(img)(_n9##x,_n9##y,z,c)), \
  (I[439] = (T)(img)(_n9##x,_n10##y,z,c)), \
- 10>=((img)._width)?(img).width()-1:10); \
+ 10>=((img)._width)?(img).width() - 1:10); \
  (_n10##x<(img).width() && ( \
  (I[20] = (T)(img)(_n10##x,_p10##y,z,c)), \
  (I[41] = (T)(img)(_n10##x,_p9##y,z,c)), \
@@ -6045,25 +6045,25 @@
 
 #define cimg_for_in21x21(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in21((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
  _n10##x = (int)( \
  (I[0] = (T)(img)(_p10##x,_p10##y,z,c)), \
  (I[21] = (T)(img)(_p10##x,_p9##y,z,c)), \
@@ -6485,7 +6485,7 @@
  (I[397] = (T)(img)(_n9##x,_n8##y,z,c)), \
  (I[418] = (T)(img)(_n9##x,_n9##y,z,c)), \
  (I[439] = (T)(img)(_n9##x,_n10##y,z,c)), \
- x+10>=(img).width()?(img).width()-1:x+10); \
+ x + 10>=(img).width()?(img).width() - 1:x + 10); \
  x<=(int)(x1) && ((_n10##x<(img).width() && ( \
  (I[20] = (T)(img)(_n10##x,_p10##y,z,c)), \
  (I[41] = (T)(img)(_n10##x,_p9##y,z,c)), \
@@ -6559,17 +6559,17 @@
 //-------------------------
 #define cimg_for22(bound,i) for (int i = 0, \
  _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11; \
  _n11##i<(int)(bound) || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -6591,27 +6591,27 @@
 #define cimg_for22XYZC(img,x,y,z,c) cimg_for22C(img,c) cimg_for22XYZ(img,x,y,z)
 
 #define cimg_for_in22(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11; \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11; \
  i<=(int)(i1) && (_n11##i<(int)(bound) || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -6635,16 +6635,16 @@
 #define cimg_for22x22(img,x,y,z,c,I,T) \
  cimg_for22((img)._height,y) for (int x = 0, \
  _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
  _n11##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = (T)(img)(0,_p10##y,z,c)), \
  (I[22] = I[23] = I[24] = I[25] = I[26] = I[27] = I[28] = I[29] = I[30] = I[31] = I[32] = (T)(img)(0,_p9##y,z,c)), \
@@ -6888,7 +6888,7 @@
  (I[438] = (T)(img)(_n10##x,_n9##y,z,c)), \
  (I[460] = (T)(img)(_n10##x,_n10##y,z,c)), \
  (I[482] = (T)(img)(_n10##x,_n11##y,z,c)), \
- 11>=((img)._width)?(img).width()-1:11); \
+ 11>=((img)._width)?(img).width() - 1:11); \
  (_n11##x<(img).width() && ( \
  (I[21] = (T)(img)(_n11##x,_p10##y,z,c)), \
  (I[43] = (T)(img)(_n11##x,_p9##y,z,c)), \
@@ -6939,26 +6939,26 @@
 
 #define cimg_for_in22x22(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in22((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
  _n11##x = (int)( \
  (I[0] = (T)(img)(_p10##x,_p10##y,z,c)), \
  (I[22] = (T)(img)(_p10##x,_p9##y,z,c)), \
@@ -7422,7 +7422,7 @@
  (I[438] = (T)(img)(_n10##x,_n9##y,z,c)), \
  (I[460] = (T)(img)(_n10##x,_n10##y,z,c)), \
  (I[482] = (T)(img)(_n10##x,_n11##y,z,c)), \
- x+11>=(img).width()?(img).width()-1:x+11); \
+ x + 11>=(img).width()?(img).width() - 1:x + 11); \
  x<=(int)(x1) && ((_n11##x<(img).width() && ( \
  (I[21] = (T)(img)(_n11##x,_p10##y,z,c)), \
  (I[43] = (T)(img)(_n11##x,_p9##y,z,c)), \
@@ -7499,17 +7499,17 @@
 //-------------------------
 #define cimg_for23(bound,i) for (int i = 0, \
  _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11; \
  _n11##i<(int)(bound) || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -7531,28 +7531,28 @@
 #define cimg_for23XYZC(img,x,y,z,c) cimg_for23C(img,c) cimg_for23XYZ(img,x,y,z)
 
 #define cimg_for_in23(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11; \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11; \
  i<=(int)(i1) && (_n11##i<(int)(bound) || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -7576,16 +7576,16 @@
 #define cimg_for23x23(img,x,y,z,c,I,T) \
  cimg_for23((img)._height,y) for (int x = 0, \
  _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
  _n11##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = (T)(img)(0,_p11##y,z,c)), \
  (I[23] = I[24] = I[25] = I[26] = I[27] = I[28] = I[29] = I[30] = I[31] = I[32] = I[33] = I[34] = (T)(img)(0,_p10##y,z,c)), \
@@ -7840,7 +7840,7 @@
  (I[481] = (T)(img)(_n10##x,_n9##y,z,c)), \
  (I[504] = (T)(img)(_n10##x,_n10##y,z,c)), \
  (I[527] = (T)(img)(_n10##x,_n11##y,z,c)), \
- 11>=((img)._width)?(img).width()-1:11); \
+ 11>=((img)._width)?(img).width() - 1:11); \
  (_n11##x<(img).width() && ( \
  (I[22] = (T)(img)(_n11##x,_p11##y,z,c)), \
  (I[45] = (T)(img)(_n11##x,_p10##y,z,c)), \
@@ -7893,27 +7893,27 @@
 
 #define cimg_for_in23x23(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in23((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
  _n11##x = (int)( \
  (I[0] = (T)(img)(_p11##x,_p11##y,z,c)), \
  (I[23] = (T)(img)(_p11##x,_p10##y,z,c)), \
@@ -8421,7 +8421,7 @@
  (I[481] = (T)(img)(_n10##x,_n9##y,z,c)), \
  (I[504] = (T)(img)(_n10##x,_n10##y,z,c)), \
  (I[527] = (T)(img)(_n10##x,_n11##y,z,c)), \
- x+11>=(img).width()?(img).width()-1:x+11); \
+ x + 11>=(img).width()?(img).width() - 1:x + 11); \
  x<=(int)(x1) && ((_n11##x<(img).width() && ( \
  (I[22] = (T)(img)(_n11##x,_p11##y,z,c)), \
  (I[45] = (T)(img)(_n11##x,_p10##y,z,c)), \
@@ -8501,18 +8501,18 @@
 //-------------------------
 #define cimg_for24(bound,i) for (int i = 0, \
  _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12; \
  _n12##i<(int)(bound) || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -8534,29 +8534,29 @@
 #define cimg_for24XYZC(img,x,y,z,c) cimg_for24C(img,c) cimg_for24XYZ(img,x,y,z)
 
 #define cimg_for_in24(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12; \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12; \
  i<=(int)(i1) && (_n12##i<(int)(bound) || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -8580,17 +8580,17 @@
 #define cimg_for24x24(img,x,y,z,c,I,T) \
  cimg_for24((img)._height,y) for (int x = 0, \
  _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
  _n12##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = (T)(img)(0,_p11##y,z,c)), \
  (I[24] = I[25] = I[26] = I[27] = I[28] = I[29] = I[30] = I[31] = I[32] = I[33] = I[34] = I[35] = (T)(img)(0,_p10##y,z,c)), \
@@ -8880,7 +8880,7 @@
  (I[526] = (T)(img)(_n11##x,_n10##y,z,c)), \
  (I[550] = (T)(img)(_n11##x,_n11##y,z,c)), \
  (I[574] = (T)(img)(_n11##x,_n12##y,z,c)), \
- 12>=((img)._width)?(img).width()-1:12); \
+ 12>=((img)._width)?(img).width() - 1:12); \
  (_n12##x<(img).width() && ( \
  (I[23] = (T)(img)(_n12##x,_p11##y,z,c)), \
  (I[47] = (T)(img)(_n12##x,_p10##y,z,c)), \
@@ -8935,28 +8935,28 @@
 
 #define cimg_for_in24x24(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in24((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
  _n12##x = (int)( \
  (I[0] = (T)(img)(_p11##x,_p11##y,z,c)), \
  (I[24] = (T)(img)(_p11##x,_p10##y,z,c)), \
@@ -9510,7 +9510,7 @@
  (I[526] = (T)(img)(_n11##x,_n10##y,z,c)), \
  (I[550] = (T)(img)(_n11##x,_n11##y,z,c)), \
  (I[574] = (T)(img)(_n11##x,_n12##y,z,c)), \
- x+12>=(img).width()?(img).width()-1:x+12); \
+ x + 12>=(img).width()?(img).width() - 1:x + 12); \
  x<=(int)(x1) && ((_n12##x<(img).width() && ( \
  (I[23] = (T)(img)(_n12##x,_p11##y,z,c)), \
  (I[47] = (T)(img)(_n12##x,_p10##y,z,c)), \
@@ -9593,18 +9593,18 @@
 //-------------------------
 #define cimg_for25(bound,i) for (int i = 0, \
  _p12##i = 0, _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12; \
  _n12##i<(int)(bound) || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -9626,30 +9626,30 @@
 #define cimg_for25XYZC(img,x,y,z,c) cimg_for25C(img,c) cimg_for25XYZ(img,x,y,z)
 
 #define cimg_for_in25(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p12##i = i-12<0?0:i-12, \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12; \
+ _p12##i = i - 12<0?0:i - 12, \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12; \
  i<=(int)(i1) && (_n12##i<(int)(bound) || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -9673,17 +9673,17 @@
 #define cimg_for25x25(img,x,y,z,c,I,T) \
  cimg_for25((img)._height,y) for (int x = 0, \
  _p12##x = 0, _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
  _n12##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = I[12] = (T)(img)(0,_p12##y,z,c)), \
  (I[25] = I[26] = I[27] = I[28] = I[29] = I[30] = I[31] = I[32] = I[33] = I[34] = I[35] = I[36] = I[37] = (T)(img)(0,_p11##y,z,c)), \
@@ -9985,7 +9985,7 @@
  (I[573] = (T)(img)(_n11##x,_n10##y,z,c)), \
  (I[598] = (T)(img)(_n11##x,_n11##y,z,c)), \
  (I[623] = (T)(img)(_n11##x,_n12##y,z,c)), \
- 12>=((img)._width)?(img).width()-1:12); \
+ 12>=((img)._width)?(img).width() - 1:12); \
  (_n12##x<(img).width() && ( \
  (I[24] = (T)(img)(_n12##x,_p12##y,z,c)), \
  (I[49] = (T)(img)(_n12##x,_p11##y,z,c)), \
@@ -10042,29 +10042,29 @@
 
 #define cimg_for_in25x25(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in25((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p12##x = x-12<0?0:x-12, \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
+ _p12##x = x - 12<0?0:x - 12, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
  _n12##x = (int)( \
  (I[0] = (T)(img)(_p12##x,_p12##y,z,c)), \
  (I[25] = (T)(img)(_p12##x,_p11##y,z,c)), \
@@ -10666,7 +10666,7 @@
  (I[573] = (T)(img)(_n11##x,_n10##y,z,c)), \
  (I[598] = (T)(img)(_n11##x,_n11##y,z,c)), \
  (I[623] = (T)(img)(_n11##x,_n12##y,z,c)), \
- x+12>=(img).width()?(img).width()-1:x+12); \
+ x + 12>=(img).width()?(img).width() - 1:x + 12); \
  x<=(int)(x1) && ((_n12##x<(img).width() && ( \
  (I[24] = (T)(img)(_n12##x,_p12##y,z,c)), \
  (I[49] = (T)(img)(_n12##x,_p11##y,z,c)), \
@@ -10752,19 +10752,19 @@
 //-------------------------
 #define cimg_for26(bound,i) for (int i = 0, \
  _p12##i = 0, _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12, \
- _n13##i = 13>=(int)(bound)?(int)(bound)-1:13; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12, \
+ _n13##i = 13>=(int)(bound)?(int)(bound) - 1:13; \
  _n13##i<(int)(bound) || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -10786,31 +10786,31 @@
 #define cimg_for26XYZC(img,x,y,z,c) cimg_for26C(img,c) cimg_for26XYZ(img,x,y,z)
 
 #define cimg_for_in26(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p12##i = i-12<0?0:i-12, \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12, \
- _n13##i = i+13>=(int)(bound)?(int)(bound)-1:i+13; \
+ _p12##i = i - 12<0?0:i - 12, \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12, \
+ _n13##i = i + 13>=(int)(bound)?(int)(bound) - 1:i + 13; \
  i<=(int)(i1) && (_n13##i<(int)(bound) || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -10834,18 +10834,18 @@
 #define cimg_for26x26(img,x,y,z,c,I,T) \
  cimg_for26((img)._height,y) for (int x = 0, \
  _p12##x = 0, _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
- _n12##x = 12>=((img)._width)?(img).width()-1:12, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
+ _n12##x = 12>=((img)._width)?(img).width() - 1:12, \
  _n13##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = I[12] = (T)(img)(0,_p12##y,z,c)), \
  (I[26] = I[27] = I[28] = I[29] = I[30] = I[31] = I[32] = I[33] = I[34] = I[35] = I[36] = I[37] = I[38] = (T)(img)(0,_p11##y,z,c)), \
@@ -11185,7 +11185,7 @@
  (I[622] = (T)(img)(_n12##x,_n11##y,z,c)), \
  (I[648] = (T)(img)(_n12##x,_n12##y,z,c)), \
  (I[674] = (T)(img)(_n12##x,_n13##y,z,c)), \
- 13>=((img)._width)?(img).width()-1:13); \
+ 13>=((img)._width)?(img).width() - 1:13); \
  (_n13##x<(img).width() && ( \
  (I[25] = (T)(img)(_n13##x,_p12##y,z,c)), \
  (I[51] = (T)(img)(_n13##x,_p11##y,z,c)), \
@@ -11244,30 +11244,30 @@
 
 #define cimg_for_in26x26(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in26((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p12##x = x-12<0?0:x-12, \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
- _n12##x = x+12>=(img).width()?(img).width()-1:x+12, \
+ _p12##x = x - 12<0?0:x - 12, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
+ _n12##x = x + 12>=(img).width()?(img).width() - 1:x + 12, \
  _n13##x = (int)( \
  (I[0] = (T)(img)(_p12##x,_p12##y,z,c)), \
  (I[26] = (T)(img)(_p12##x,_p11##y,z,c)), \
@@ -11919,7 +11919,7 @@
  (I[622] = (T)(img)(_n12##x,_n11##y,z,c)), \
  (I[648] = (T)(img)(_n12##x,_n12##y,z,c)), \
  (I[674] = (T)(img)(_n12##x,_n13##y,z,c)), \
- x+13>=(img).width()?(img).width()-1:x+13); \
+ x + 13>=(img).width()?(img).width() - 1:x + 13); \
  x<=(int)(x1) && ((_n13##x<(img).width() && ( \
  (I[25] = (T)(img)(_n13##x,_p12##y,z,c)), \
  (I[51] = (T)(img)(_n13##x,_p11##y,z,c)), \
@@ -12008,19 +12008,19 @@
 //-------------------------
 #define cimg_for27(bound,i) for (int i = 0, \
  _p13##i = 0, _p12##i = 0, _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12, \
- _n13##i = 13>=(int)(bound)?(int)(bound)-1:13; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12, \
+ _n13##i = 13>=(int)(bound)?(int)(bound) - 1:13; \
  _n13##i<(int)(bound) || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -12042,32 +12042,32 @@
 #define cimg_for27XYZC(img,x,y,z,c) cimg_for27C(img,c) cimg_for27XYZ(img,x,y,z)
 
 #define cimg_for_in27(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p13##i = i-13<0?0:i-13, \
- _p12##i = i-12<0?0:i-12, \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12, \
- _n13##i = i+13>=(int)(bound)?(int)(bound)-1:i+13; \
+ _p13##i = i - 13<0?0:i - 13, \
+ _p12##i = i - 12<0?0:i - 12, \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12, \
+ _n13##i = i + 13>=(int)(bound)?(int)(bound) - 1:i + 13; \
  i<=(int)(i1) && (_n13##i<(int)(bound) || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -12091,18 +12091,18 @@
 #define cimg_for27x27(img,x,y,z,c,I,T) \
  cimg_for27((img)._height,y) for (int x = 0, \
  _p13##x = 0, _p12##x = 0, _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
- _n12##x = 12>=((img)._width)?(img).width()-1:12, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
+ _n12##x = 12>=((img)._width)?(img).width() - 1:12, \
  _n13##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = I[12] = I[13] = (T)(img)(0,_p13##y,z,c)), \
  (I[27] = I[28] = I[29] = I[30] = I[31] = I[32] = I[33] = I[34] = I[35] = I[36] = I[37] = I[38] = I[39] = I[40] = (T)(img)(0,_p12##y,z,c)), \
@@ -12455,7 +12455,7 @@
  (I[673] = (T)(img)(_n12##x,_n11##y,z,c)), \
  (I[700] = (T)(img)(_n12##x,_n12##y,z,c)), \
  (I[727] = (T)(img)(_n12##x,_n13##y,z,c)), \
- 13>=((img)._width)?(img).width()-1:13); \
+ 13>=((img)._width)?(img).width() - 1:13); \
  (_n13##x<(img).width() && ( \
  (I[26] = (T)(img)(_n13##x,_p13##y,z,c)), \
  (I[53] = (T)(img)(_n13##x,_p12##y,z,c)), \
@@ -12516,31 +12516,31 @@
 
 #define cimg_for_in27x27(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in27((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p13##x = x-13<0?0:x-13, \
- _p12##x = x-12<0?0:x-12, \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
- _n12##x = x+12>=(img).width()?(img).width()-1:x+12, \
+ _p13##x = x - 13<0?0:x - 13, \
+ _p12##x = x - 12<0?0:x - 12, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
+ _n12##x = x + 12>=(img).width()?(img).width() - 1:x + 12, \
  _n13##x = (int)( \
  (I[0] = (T)(img)(_p13##x,_p13##y,z,c)), \
  (I[27] = (T)(img)(_p13##x,_p12##y,z,c)), \
@@ -13244,7 +13244,7 @@
  (I[673] = (T)(img)(_n12##x,_n11##y,z,c)), \
  (I[700] = (T)(img)(_n12##x,_n12##y,z,c)), \
  (I[727] = (T)(img)(_n12##x,_n13##y,z,c)), \
- x+13>=(img).width()?(img).width()-1:x+13); \
+ x + 13>=(img).width()?(img).width() - 1:x + 13); \
  x<=(int)(x1) && ((_n13##x<(img).width() && ( \
  (I[26] = (T)(img)(_n13##x,_p13##y,z,c)), \
  (I[53] = (T)(img)(_n13##x,_p12##y,z,c)), \
@@ -13336,20 +13336,20 @@
 //-------------------------
 #define cimg_for28(bound,i) for (int i = 0, \
  _p13##i = 0, _p12##i = 0, _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12, \
- _n13##i = 13>=(int)(bound)?(int)(bound)-1:13, \
- _n14##i = 14>=(int)(bound)?(int)(bound)-1:14; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12, \
+ _n13##i = 13>=(int)(bound)?(int)(bound) - 1:13, \
+ _n14##i = 14>=(int)(bound)?(int)(bound) - 1:14; \
  _n14##i<(int)(bound) || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -13371,33 +13371,33 @@
 #define cimg_for28XYZC(img,x,y,z,c) cimg_for28C(img,c) cimg_for28XYZ(img,x,y,z)
 
 #define cimg_for_in28(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p13##i = i-13<0?0:i-13, \
- _p12##i = i-12<0?0:i-12, \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12, \
- _n13##i = i+13>=(int)(bound)?(int)(bound)-1:i+13, \
- _n14##i = i+14>=(int)(bound)?(int)(bound)-1:i+14; \
+ _p13##i = i - 13<0?0:i - 13, \
+ _p12##i = i - 12<0?0:i - 12, \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12, \
+ _n13##i = i + 13>=(int)(bound)?(int)(bound) - 1:i + 13, \
+ _n14##i = i + 14>=(int)(bound)?(int)(bound) - 1:i + 14; \
  i<=(int)(i1) && (_n14##i<(int)(bound) || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -13421,19 +13421,19 @@
 #define cimg_for28x28(img,x,y,z,c,I,T) \
  cimg_for28((img)._height,y) for (int x = 0, \
  _p13##x = 0, _p12##x = 0, _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
- _n12##x = 12>=((img)._width)?(img).width()-1:12, \
- _n13##x = 13>=((img)._width)?(img).width()-1:13, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
+ _n12##x = 12>=((img)._width)?(img).width() - 1:12, \
+ _n13##x = 13>=((img)._width)?(img).width() - 1:13, \
  _n14##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = I[12] = I[13] = (T)(img)(0,_p13##y,z,c)), \
  (I[28] = I[29] = I[30] = I[31] = I[32] = I[33] = I[34] = I[35] = I[36] = I[37] = I[38] = I[39] = I[40] = I[41] = (T)(img)(0,_p12##y,z,c)), \
@@ -13827,7 +13827,7 @@
  (I[726] = (T)(img)(_n13##x,_n12##y,z,c)), \
  (I[754] = (T)(img)(_n13##x,_n13##y,z,c)), \
  (I[782] = (T)(img)(_n13##x,_n14##y,z,c)), \
- 14>=((img)._width)?(img).width()-1:14); \
+ 14>=((img)._width)?(img).width() - 1:14); \
  (_n14##x<(img).width() && ( \
  (I[27] = (T)(img)(_n14##x,_p13##y,z,c)), \
  (I[55] = (T)(img)(_n14##x,_p12##y,z,c)), \
@@ -13890,32 +13890,32 @@
 
 #define cimg_for_in28x28(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in28((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p13##x = x-13<0?0:x-13, \
- _p12##x = x-12<0?0:x-12, \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
- _n12##x = x+12>=(img).width()?(img).width()-1:x+12, \
- _n13##x = x+13>=(img).width()?(img).width()-1:x+13, \
+ _p13##x = x - 13<0?0:x - 13, \
+ _p12##x = x - 12<0?0:x - 12, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
+ _n12##x = x + 12>=(img).width()?(img).width() - 1:x + 12, \
+ _n13##x = x + 13>=(img).width()?(img).width() - 1:x + 13, \
  _n14##x = (int)( \
  (I[0] = (T)(img)(_p13##x,_p13##y,z,c)), \
  (I[28] = (T)(img)(_p13##x,_p12##y,z,c)), \
@@ -14673,7 +14673,7 @@
  (I[726] = (T)(img)(_n13##x,_n12##y,z,c)), \
  (I[754] = (T)(img)(_n13##x,_n13##y,z,c)), \
  (I[782] = (T)(img)(_n13##x,_n14##y,z,c)), \
- x+14>=(img).width()?(img).width()-1:x+14); \
+ x + 14>=(img).width()?(img).width() - 1:x + 14); \
  x<=(int)(x1) && ((_n14##x<(img).width() && ( \
  (I[27] = (T)(img)(_n14##x,_p13##y,z,c)), \
  (I[55] = (T)(img)(_n14##x,_p12##y,z,c)), \
@@ -14768,20 +14768,20 @@
 //-------------------------
 #define cimg_for29(bound,i) for (int i = 0, \
  _p14##i = 0, _p13##i = 0, _p12##i = 0, _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12, \
- _n13##i = 13>=(int)(bound)?(int)(bound)-1:13, \
- _n14##i = 14>=(int)(bound)?(int)(bound)-1:14; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12, \
+ _n13##i = 13>=(int)(bound)?(int)(bound) - 1:13, \
+ _n14##i = 14>=(int)(bound)?(int)(bound) - 1:14; \
  _n14##i<(int)(bound) || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p14##i = _p13##i, _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -14803,34 +14803,34 @@
 #define cimg_for29XYZC(img,x,y,z,c) cimg_for29C(img,c) cimg_for29XYZ(img,x,y,z)
 
 #define cimg_for_in29(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p14##i = i-14<0?0:i-14, \
- _p13##i = i-13<0?0:i-13, \
- _p12##i = i-12<0?0:i-12, \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12, \
- _n13##i = i+13>=(int)(bound)?(int)(bound)-1:i+13, \
- _n14##i = i+14>=(int)(bound)?(int)(bound)-1:i+14; \
+ _p14##i = i - 14<0?0:i - 14, \
+ _p13##i = i - 13<0?0:i - 13, \
+ _p12##i = i - 12<0?0:i - 12, \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12, \
+ _n13##i = i + 13>=(int)(bound)?(int)(bound) - 1:i + 13, \
+ _n14##i = i + 14>=(int)(bound)?(int)(bound) - 1:i + 14; \
  i<=(int)(i1) && (_n14##i<(int)(bound) || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p14##i = _p13##i, _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -14854,19 +14854,19 @@
 #define cimg_for29x29(img,x,y,z,c,I,T) \
  cimg_for29((img)._height,y) for (int x = 0, \
  _p14##x = 0, _p13##x = 0, _p12##x = 0, _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
- _n12##x = 12>=((img)._width)?(img).width()-1:12, \
- _n13##x = 13>=((img)._width)?(img).width()-1:13, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
+ _n12##x = 12>=((img)._width)?(img).width() - 1:12, \
+ _n13##x = 13>=((img)._width)?(img).width() - 1:13, \
  _n14##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = I[12] = I[13] = I[14] = (T)(img)(0,_p14##y,z,c)), \
  (I[29] = I[30] = I[31] = I[32] = I[33] = I[34] = I[35] = I[36] = I[37] = I[38] = I[39] = I[40] = I[41] = I[42] = I[43] = (T)(img)(0,_p13##y,z,c)), \
@@ -15274,7 +15274,7 @@
  (I[781] = (T)(img)(_n13##x,_n12##y,z,c)), \
  (I[810] = (T)(img)(_n13##x,_n13##y,z,c)), \
  (I[839] = (T)(img)(_n13##x,_n14##y,z,c)), \
- 14>=((img)._width)?(img).width()-1:14); \
+ 14>=((img)._width)?(img).width() - 1:14); \
  (_n14##x<(img).width() && ( \
  (I[28] = (T)(img)(_n14##x,_p14##y,z,c)), \
  (I[57] = (T)(img)(_n14##x,_p13##y,z,c)), \
@@ -15339,33 +15339,33 @@
 
 #define cimg_for_in29x29(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in29((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p14##x = x-14<0?0:x-14, \
- _p13##x = x-13<0?0:x-13, \
- _p12##x = x-12<0?0:x-12, \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
- _n12##x = x+12>=(img).width()?(img).width()-1:x+12, \
- _n13##x = x+13>=(img).width()?(img).width()-1:x+13, \
+ _p14##x = x - 14<0?0:x - 14, \
+ _p13##x = x - 13<0?0:x - 13, \
+ _p12##x = x - 12<0?0:x - 12, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
+ _n12##x = x + 12>=(img).width()?(img).width() - 1:x + 12, \
+ _n13##x = x + 13>=(img).width()?(img).width() - 1:x + 13, \
  _n14##x = (int)( \
  (I[0] = (T)(img)(_p14##x,_p14##y,z,c)), \
  (I[29] = (T)(img)(_p14##x,_p13##y,z,c)), \
@@ -16179,7 +16179,7 @@
  (I[781] = (T)(img)(_n13##x,_n12##y,z,c)), \
  (I[810] = (T)(img)(_n13##x,_n13##y,z,c)), \
  (I[839] = (T)(img)(_n13##x,_n14##y,z,c)), \
- x+14>=(img).width()?(img).width()-1:x+14); \
+ x + 14>=(img).width()?(img).width() - 1:x + 14); \
  x<=(int)(x1) && ((_n14##x<(img).width() && ( \
  (I[28] = (T)(img)(_n14##x,_p14##y,z,c)), \
  (I[57] = (T)(img)(_n14##x,_p13##y,z,c)), \
@@ -16277,21 +16277,21 @@
 //-------------------------
 #define cimg_for30(bound,i) for (int i = 0, \
  _p14##i = 0, _p13##i = 0, _p12##i = 0, _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12, \
- _n13##i = 13>=(int)(bound)?(int)(bound)-1:13, \
- _n14##i = 14>=(int)(bound)?(int)(bound)-1:14, \
- _n15##i = 15>=(int)(bound)?(int)(bound)-1:15; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12, \
+ _n13##i = 13>=(int)(bound)?(int)(bound) - 1:13, \
+ _n14##i = 14>=(int)(bound)?(int)(bound) - 1:14, \
+ _n15##i = 15>=(int)(bound)?(int)(bound) - 1:15; \
  _n15##i<(int)(bound) || _n14##i==--_n15##i || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n15##i = _n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p14##i = _p13##i, _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -16313,35 +16313,35 @@
 #define cimg_for30XYZC(img,x,y,z,c) cimg_for30C(img,c) cimg_for30XYZ(img,x,y,z)
 
 #define cimg_for_in30(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p14##i = i-14<0?0:i-14, \
- _p13##i = i-13<0?0:i-13, \
- _p12##i = i-12<0?0:i-12, \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12, \
- _n13##i = i+13>=(int)(bound)?(int)(bound)-1:i+13, \
- _n14##i = i+14>=(int)(bound)?(int)(bound)-1:i+14, \
- _n15##i = i+15>=(int)(bound)?(int)(bound)-1:i+15; \
+ _p14##i = i - 14<0?0:i - 14, \
+ _p13##i = i - 13<0?0:i - 13, \
+ _p12##i = i - 12<0?0:i - 12, \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12, \
+ _n13##i = i + 13>=(int)(bound)?(int)(bound) - 1:i + 13, \
+ _n14##i = i + 14>=(int)(bound)?(int)(bound) - 1:i + 14, \
+ _n15##i = i + 15>=(int)(bound)?(int)(bound) - 1:i + 15; \
  i<=(int)(i1) && (_n15##i<(int)(bound) || _n14##i==--_n15##i || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n15##i = _n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p14##i = _p13##i, _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -16365,20 +16365,20 @@
 #define cimg_for30x30(img,x,y,z,c,I,T) \
  cimg_for30((img)._height,y) for (int x = 0, \
  _p14##x = 0, _p13##x = 0, _p12##x = 0, _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
- _n12##x = 12>=((img)._width)?(img).width()-1:12, \
- _n13##x = 13>=((img)._width)?(img).width()-1:13, \
- _n14##x = 14>=((img)._width)?(img).width()-1:14, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
+ _n12##x = 12>=((img)._width)?(img).width() - 1:12, \
+ _n13##x = 13>=((img)._width)?(img).width() - 1:13, \
+ _n14##x = 14>=((img)._width)?(img).width() - 1:14, \
  _n15##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = I[12] = I[13] = I[14] = (T)(img)(0,_p14##y,z,c)), \
  (I[30] = I[31] = I[32] = I[33] = I[34] = I[35] = I[36] = I[37] = I[38] = I[39] = I[40] = I[41] = I[42] = I[43] = I[44] = (T)(img)(0,_p13##y,z,c)), \
@@ -16830,7 +16830,7 @@
  (I[838] = (T)(img)(_n14##x,_n13##y,z,c)), \
  (I[868] = (T)(img)(_n14##x,_n14##y,z,c)), \
  (I[898] = (T)(img)(_n14##x,_n15##y,z,c)), \
- 15>=((img)._width)?(img).width()-1:15); \
+ 15>=((img)._width)?(img).width() - 1:15); \
  (_n15##x<(img).width() && ( \
  (I[29] = (T)(img)(_n15##x,_p14##y,z,c)), \
  (I[59] = (T)(img)(_n15##x,_p13##y,z,c)), \
@@ -16897,34 +16897,34 @@
 
 #define cimg_for_in30x30(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in30((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p14##x = x-14<0?0:x-14, \
- _p13##x = x-13<0?0:x-13, \
- _p12##x = x-12<0?0:x-12, \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
- _n12##x = x+12>=(img).width()?(img).width()-1:x+12, \
- _n13##x = x+13>=(img).width()?(img).width()-1:x+13, \
- _n14##x = x+14>=(img).width()?(img).width()-1:x+14, \
+ _p14##x = x - 14<0?0:x - 14, \
+ _p13##x = x - 13<0?0:x - 13, \
+ _p12##x = x - 12<0?0:x - 12, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
+ _n12##x = x + 12>=(img).width()?(img).width() - 1:x + 12, \
+ _n13##x = x + 13>=(img).width()?(img).width() - 1:x + 13, \
+ _n14##x = x + 14>=(img).width()?(img).width() - 1:x + 14, \
  _n15##x = (int)( \
  (I[0] = (T)(img)(_p14##x,_p14##y,z,c)), \
  (I[30] = (T)(img)(_p14##x,_p13##y,z,c)), \
@@ -17796,7 +17796,7 @@
  (I[838] = (T)(img)(_n14##x,_n13##y,z,c)), \
  (I[868] = (T)(img)(_n14##x,_n14##y,z,c)), \
  (I[898] = (T)(img)(_n14##x,_n15##y,z,c)), \
- x+15>=(img).width()?(img).width()-1:x+15); \
+ x + 15>=(img).width()?(img).width() - 1:x + 15); \
  x<=(int)(x1) && ((_n15##x<(img).width() && ( \
  (I[29] = (T)(img)(_n15##x,_p14##y,z,c)), \
  (I[59] = (T)(img)(_n15##x,_p13##y,z,c)), \
@@ -17897,21 +17897,21 @@
 //-------------------------
 #define cimg_for31(bound,i) for (int i = 0, \
  _p15##i = 0, _p14##i = 0, _p13##i = 0, _p12##i = 0, _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12, \
- _n13##i = 13>=(int)(bound)?(int)(bound)-1:13, \
- _n14##i = 14>=(int)(bound)?(int)(bound)-1:14, \
- _n15##i = 15>=(int)(bound)?(int)(bound)-1:15; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12, \
+ _n13##i = 13>=(int)(bound)?(int)(bound) - 1:13, \
+ _n14##i = 14>=(int)(bound)?(int)(bound) - 1:14, \
+ _n15##i = 15>=(int)(bound)?(int)(bound) - 1:15; \
  _n15##i<(int)(bound) || _n14##i==--_n15##i || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n15##i = _n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p15##i = _p14##i, _p14##i = _p13##i, _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -17933,36 +17933,36 @@
 #define cimg_for31XYZC(img,x,y,z,c) cimg_for31C(img,c) cimg_for31XYZ(img,x,y,z)
 
 #define cimg_for_in31(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p15##i = i-15<0?0:i-15, \
- _p14##i = i-14<0?0:i-14, \
- _p13##i = i-13<0?0:i-13, \
- _p12##i = i-12<0?0:i-12, \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12, \
- _n13##i = i+13>=(int)(bound)?(int)(bound)-1:i+13, \
- _n14##i = i+14>=(int)(bound)?(int)(bound)-1:i+14, \
- _n15##i = i+15>=(int)(bound)?(int)(bound)-1:i+15; \
+ _p15##i = i - 15<0?0:i - 15, \
+ _p14##i = i - 14<0?0:i - 14, \
+ _p13##i = i - 13<0?0:i - 13, \
+ _p12##i = i - 12<0?0:i - 12, \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12, \
+ _n13##i = i + 13>=(int)(bound)?(int)(bound) - 1:i + 13, \
+ _n14##i = i + 14>=(int)(bound)?(int)(bound) - 1:i + 14, \
+ _n15##i = i + 15>=(int)(bound)?(int)(bound) - 1:i + 15; \
  i<=(int)(i1) && (_n15##i<(int)(bound) || _n14##i==--_n15##i || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n15##i = _n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p15##i = _p14##i, _p14##i = _p13##i, _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -17986,20 +17986,20 @@
 #define cimg_for31x31(img,x,y,z,c,I,T) \
  cimg_for31((img)._height,y) for (int x = 0, \
  _p15##x = 0, _p14##x = 0, _p13##x = 0, _p12##x = 0, _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
- _n12##x = 12>=((img)._width)?(img).width()-1:12, \
- _n13##x = 13>=((img)._width)?(img).width()-1:13, \
- _n14##x = 14>=((img)._width)?(img).width()-1:14, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
+ _n12##x = 12>=((img)._width)?(img).width() - 1:12, \
+ _n13##x = 13>=((img)._width)?(img).width() - 1:13, \
+ _n14##x = 14>=((img)._width)?(img).width() - 1:14, \
  _n15##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = I[12] = I[13] = I[14] = I[15] = (T)(img)(0,_p15##y,z,c)), \
  (I[31] = I[32] = I[33] = I[34] = I[35] = I[36] = I[37] = I[38] = I[39] = I[40] = I[41] = I[42] = I[43] = I[44] = I[45] = I[46] = (T)(img)(0,_p14##y,z,c)), \
@@ -18466,7 +18466,7 @@
  (I[897] = (T)(img)(_n14##x,_n13##y,z,c)), \
  (I[928] = (T)(img)(_n14##x,_n14##y,z,c)), \
  (I[959] = (T)(img)(_n14##x,_n15##y,z,c)), \
- 15>=((img)._width)?(img).width()-1:15); \
+ 15>=((img)._width)?(img).width() - 1:15); \
  (_n15##x<(img).width() && ( \
  (I[30] = (T)(img)(_n15##x,_p15##y,z,c)), \
  (I[61] = (T)(img)(_n15##x,_p14##y,z,c)), \
@@ -18535,35 +18535,35 @@
 
 #define cimg_for_in31x31(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in31((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p15##x = x-15<0?0:x-15, \
- _p14##x = x-14<0?0:x-14, \
- _p13##x = x-13<0?0:x-13, \
- _p12##x = x-12<0?0:x-12, \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
- _n12##x = x+12>=(img).width()?(img).width()-1:x+12, \
- _n13##x = x+13>=(img).width()?(img).width()-1:x+13, \
- _n14##x = x+14>=(img).width()?(img).width()-1:x+14, \
+ _p15##x = x - 15<0?0:x - 15, \
+ _p14##x = x - 14<0?0:x - 14, \
+ _p13##x = x - 13<0?0:x - 13, \
+ _p12##x = x - 12<0?0:x - 12, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
+ _n12##x = x + 12>=(img).width()?(img).width() - 1:x + 12, \
+ _n13##x = x + 13>=(img).width()?(img).width() - 1:x + 13, \
+ _n14##x = x + 14>=(img).width()?(img).width() - 1:x + 14, \
  _n15##x = (int)( \
  (I[0] = (T)(img)(_p15##x,_p15##y,z,c)), \
  (I[31] = (T)(img)(_p15##x,_p14##y,z,c)), \
@@ -19495,7 +19495,7 @@
  (I[897] = (T)(img)(_n14##x,_n13##y,z,c)), \
  (I[928] = (T)(img)(_n14##x,_n14##y,z,c)), \
  (I[959] = (T)(img)(_n14##x,_n15##y,z,c)), \
- x+15>=(img).width()?(img).width()-1:x+15); \
+ x + 15>=(img).width()?(img).width() - 1:x + 15); \
  x<=(int)(x1) && ((_n15##x<(img).width() && ( \
  (I[30] = (T)(img)(_n15##x,_p15##y,z,c)), \
  (I[61] = (T)(img)(_n15##x,_p14##y,z,c)), \
@@ -19599,22 +19599,22 @@
 //-------------------------
 #define cimg_for32(bound,i) for (int i = 0, \
  _p15##i = 0, _p14##i = 0, _p13##i = 0, _p12##i = 0, _p11##i = 0, _p10##i = 0, _p9##i = 0, _p8##i = 0, _p7##i = 0, _p6##i = 0, _p5##i = 0, _p4##i = 0, _p3##i = 0, _p2##i = 0, _p1##i = 0, \
- _n1##i = 1>=(int)(bound)?(int)(bound)-1:1, \
- _n2##i = 2>=(int)(bound)?(int)(bound)-1:2, \
- _n3##i = 3>=(int)(bound)?(int)(bound)-1:3, \
- _n4##i = 4>=(int)(bound)?(int)(bound)-1:4, \
- _n5##i = 5>=(int)(bound)?(int)(bound)-1:5, \
- _n6##i = 6>=(int)(bound)?(int)(bound)-1:6, \
- _n7##i = 7>=(int)(bound)?(int)(bound)-1:7, \
- _n8##i = 8>=(int)(bound)?(int)(bound)-1:8, \
- _n9##i = 9>=(int)(bound)?(int)(bound)-1:9, \
- _n10##i = 10>=(int)(bound)?(int)(bound)-1:10, \
- _n11##i = 11>=(int)(bound)?(int)(bound)-1:11, \
- _n12##i = 12>=(int)(bound)?(int)(bound)-1:12, \
- _n13##i = 13>=(int)(bound)?(int)(bound)-1:13, \
- _n14##i = 14>=(int)(bound)?(int)(bound)-1:14, \
- _n15##i = 15>=(int)(bound)?(int)(bound)-1:15, \
- _n16##i = 16>=(int)(bound)?(int)(bound)-1:16; \
+ _n1##i = 1>=(int)(bound)?(int)(bound) - 1:1, \
+ _n2##i = 2>=(int)(bound)?(int)(bound) - 1:2, \
+ _n3##i = 3>=(int)(bound)?(int)(bound) - 1:3, \
+ _n4##i = 4>=(int)(bound)?(int)(bound) - 1:4, \
+ _n5##i = 5>=(int)(bound)?(int)(bound) - 1:5, \
+ _n6##i = 6>=(int)(bound)?(int)(bound) - 1:6, \
+ _n7##i = 7>=(int)(bound)?(int)(bound) - 1:7, \
+ _n8##i = 8>=(int)(bound)?(int)(bound) - 1:8, \
+ _n9##i = 9>=(int)(bound)?(int)(bound) - 1:9, \
+ _n10##i = 10>=(int)(bound)?(int)(bound) - 1:10, \
+ _n11##i = 11>=(int)(bound)?(int)(bound) - 1:11, \
+ _n12##i = 12>=(int)(bound)?(int)(bound) - 1:12, \
+ _n13##i = 13>=(int)(bound)?(int)(bound) - 1:13, \
+ _n14##i = 14>=(int)(bound)?(int)(bound) - 1:14, \
+ _n15##i = 15>=(int)(bound)?(int)(bound) - 1:15, \
+ _n16##i = 16>=(int)(bound)?(int)(bound) - 1:16; \
  _n16##i<(int)(bound) || _n15##i==--_n16##i || _n14##i==--_n15##i || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n16##i = _n15##i = _n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i); \
  _p15##i = _p14##i, _p14##i = _p13##i, _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -19636,37 +19636,37 @@
 #define cimg_for32XYZC(img,x,y,z,c) cimg_for32C(img,c) cimg_for32XYZ(img,x,y,z)
 
 #define cimg_for_in32(bound,i0,i1,i) for (int i = (int)(i0)<0?0:(int)(i0), \
- _p15##i = i-15<0?0:i-15, \
- _p14##i = i-14<0?0:i-14, \
- _p13##i = i-13<0?0:i-13, \
- _p12##i = i-12<0?0:i-12, \
- _p11##i = i-11<0?0:i-11, \
- _p10##i = i-10<0?0:i-10, \
- _p9##i = i-9<0?0:i-9, \
- _p8##i = i-8<0?0:i-8, \
- _p7##i = i-7<0?0:i-7, \
- _p6##i = i-6<0?0:i-6, \
- _p5##i = i-5<0?0:i-5, \
- _p4##i = i-4<0?0:i-4, \
- _p3##i = i-3<0?0:i-3, \
- _p2##i = i-2<0?0:i-2, \
- _p1##i = i-1<0?0:i-1, \
- _n1##i = i+1>=(int)(bound)?(int)(bound)-1:i+1, \
- _n2##i = i+2>=(int)(bound)?(int)(bound)-1:i+2, \
- _n3##i = i+3>=(int)(bound)?(int)(bound)-1:i+3, \
- _n4##i = i+4>=(int)(bound)?(int)(bound)-1:i+4, \
- _n5##i = i+5>=(int)(bound)?(int)(bound)-1:i+5, \
- _n6##i = i+6>=(int)(bound)?(int)(bound)-1:i+6, \
- _n7##i = i+7>=(int)(bound)?(int)(bound)-1:i+7, \
- _n8##i = i+8>=(int)(bound)?(int)(bound)-1:i+8, \
- _n9##i = i+9>=(int)(bound)?(int)(bound)-1:i+9, \
- _n10##i = i+10>=(int)(bound)?(int)(bound)-1:i+10, \
- _n11##i = i+11>=(int)(bound)?(int)(bound)-1:i+11, \
- _n12##i = i+12>=(int)(bound)?(int)(bound)-1:i+12, \
- _n13##i = i+13>=(int)(bound)?(int)(bound)-1:i+13, \
- _n14##i = i+14>=(int)(bound)?(int)(bound)-1:i+14, \
- _n15##i = i+15>=(int)(bound)?(int)(bound)-1:i+15, \
- _n16##i = i+16>=(int)(bound)?(int)(bound)-1:i+16; \
+ _p15##i = i - 15<0?0:i - 15, \
+ _p14##i = i - 14<0?0:i - 14, \
+ _p13##i = i - 13<0?0:i - 13, \
+ _p12##i = i - 12<0?0:i - 12, \
+ _p11##i = i - 11<0?0:i - 11, \
+ _p10##i = i - 10<0?0:i - 10, \
+ _p9##i = i - 9<0?0:i - 9, \
+ _p8##i = i - 8<0?0:i - 8, \
+ _p7##i = i - 7<0?0:i - 7, \
+ _p6##i = i - 6<0?0:i - 6, \
+ _p5##i = i - 5<0?0:i - 5, \
+ _p4##i = i - 4<0?0:i - 4, \
+ _p3##i = i - 3<0?0:i - 3, \
+ _p2##i = i - 2<0?0:i - 2, \
+ _p1##i = i - 1<0?0:i - 1, \
+ _n1##i = i + 1>=(int)(bound)?(int)(bound) - 1:i + 1, \
+ _n2##i = i + 2>=(int)(bound)?(int)(bound) - 1:i + 2, \
+ _n3##i = i + 3>=(int)(bound)?(int)(bound) - 1:i + 3, \
+ _n4##i = i + 4>=(int)(bound)?(int)(bound) - 1:i + 4, \
+ _n5##i = i + 5>=(int)(bound)?(int)(bound) - 1:i + 5, \
+ _n6##i = i + 6>=(int)(bound)?(int)(bound) - 1:i + 6, \
+ _n7##i = i + 7>=(int)(bound)?(int)(bound) - 1:i + 7, \
+ _n8##i = i + 8>=(int)(bound)?(int)(bound) - 1:i + 8, \
+ _n9##i = i + 9>=(int)(bound)?(int)(bound) - 1:i + 9, \
+ _n10##i = i + 10>=(int)(bound)?(int)(bound) - 1:i + 10, \
+ _n11##i = i + 11>=(int)(bound)?(int)(bound) - 1:i + 11, \
+ _n12##i = i + 12>=(int)(bound)?(int)(bound) - 1:i + 12, \
+ _n13##i = i + 13>=(int)(bound)?(int)(bound) - 1:i + 13, \
+ _n14##i = i + 14>=(int)(bound)?(int)(bound) - 1:i + 14, \
+ _n15##i = i + 15>=(int)(bound)?(int)(bound) - 1:i + 15, \
+ _n16##i = i + 16>=(int)(bound)?(int)(bound) - 1:i + 16; \
  i<=(int)(i1) && (_n16##i<(int)(bound) || _n15##i==--_n16##i || _n14##i==--_n15##i || _n13##i==--_n14##i || _n12##i==--_n13##i || _n11##i==--_n12##i || _n10##i==--_n11##i || _n9##i==--_n10##i || _n8##i==--_n9##i || _n7##i==--_n8##i || _n6##i==--_n7##i || _n5##i==--_n6##i || _n4##i==--_n5##i || _n3##i==--_n4##i || _n2##i==--_n3##i || _n1##i==--_n2##i || \
  i==(_n16##i = _n15##i = _n14##i = _n13##i = _n12##i = _n11##i = _n10##i = _n9##i = _n8##i = _n7##i = _n6##i = _n5##i = _n4##i = _n3##i = _n2##i = --_n1##i)); \
  _p15##i = _p14##i, _p14##i = _p13##i, _p13##i = _p12##i, _p12##i = _p11##i, _p11##i = _p10##i, _p10##i = _p9##i, _p9##i = _p8##i, _p8##i = _p7##i, _p7##i = _p6##i, _p6##i = _p5##i, _p5##i = _p4##i, _p4##i = _p3##i, _p3##i = _p2##i, _p2##i = _p1##i, _p1##i = i++, \
@@ -19690,21 +19690,21 @@
 #define cimg_for32x32(img,x,y,z,c,I,T) \
  cimg_for32((img)._height,y) for (int x = 0, \
  _p15##x = 0, _p14##x = 0, _p13##x = 0, _p12##x = 0, _p11##x = 0, _p10##x = 0, _p9##x = 0, _p8##x = 0, _p7##x = 0, _p6##x = 0, _p5##x = 0, _p4##x = 0, _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
- _n4##x = 4>=((img)._width)?(img).width()-1:4, \
- _n5##x = 5>=((img)._width)?(img).width()-1:5, \
- _n6##x = 6>=((img)._width)?(img).width()-1:6, \
- _n7##x = 7>=((img)._width)?(img).width()-1:7, \
- _n8##x = 8>=((img)._width)?(img).width()-1:8, \
- _n9##x = 9>=((img)._width)?(img).width()-1:9, \
- _n10##x = 10>=((img)._width)?(img).width()-1:10, \
- _n11##x = 11>=((img)._width)?(img).width()-1:11, \
- _n12##x = 12>=((img)._width)?(img).width()-1:12, \
- _n13##x = 13>=((img)._width)?(img).width()-1:13, \
- _n14##x = 14>=((img)._width)?(img).width()-1:14, \
- _n15##x = 15>=((img)._width)?(img).width()-1:15, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
+ _n4##x = 4>=((img)._width)?(img).width() - 1:4, \
+ _n5##x = 5>=((img)._width)?(img).width() - 1:5, \
+ _n6##x = 6>=((img)._width)?(img).width() - 1:6, \
+ _n7##x = 7>=((img)._width)?(img).width() - 1:7, \
+ _n8##x = 8>=((img)._width)?(img).width() - 1:8, \
+ _n9##x = 9>=((img)._width)?(img).width() - 1:9, \
+ _n10##x = 10>=((img)._width)?(img).width() - 1:10, \
+ _n11##x = 11>=((img)._width)?(img).width() - 1:11, \
+ _n12##x = 12>=((img)._width)?(img).width() - 1:12, \
+ _n13##x = 13>=((img)._width)?(img).width() - 1:13, \
+ _n14##x = 14>=((img)._width)?(img).width() - 1:14, \
+ _n15##x = 15>=((img)._width)?(img).width() - 1:15, \
  _n16##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = I[4] = I[5] = I[6] = I[7] = I[8] = I[9] = I[10] = I[11] = I[12] = I[13] = I[14] = I[15] = (T)(img)(0,_p15##y,z,c)), \
  (I[32] = I[33] = I[34] = I[35] = I[36] = I[37] = I[38] = I[39] = I[40] = I[41] = I[42] = I[43] = I[44] = I[45] = I[46] = I[47] = (T)(img)(0,_p14##y,z,c)), \
@@ -20218,7 +20218,7 @@
  (I[958] = (T)(img)(_n15##x,_n14##y,z,c)), \
  (I[990] = (T)(img)(_n15##x,_n15##y,z,c)), \
  (I[1022] = (T)(img)(_n15##x,_n16##y,z,c)), \
- 16>=((img)._width)?(img).width()-1:16); \
+ 16>=((img)._width)?(img).width() - 1:16); \
  (_n16##x<(img).width() && ( \
  (I[31] = (T)(img)(_n16##x,_p15##y,z,c)), \
  (I[63] = (T)(img)(_n16##x,_p14##y,z,c)), \
@@ -20289,36 +20289,36 @@
 
 #define cimg_for_in32x32(img,x0,y0,x1,y1,x,y,z,c,I,T) \
  cimg_for_in32((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p15##x = x-15<0?0:x-15, \
- _p14##x = x-14<0?0:x-14, \
- _p13##x = x-13<0?0:x-13, \
- _p12##x = x-12<0?0:x-12, \
- _p11##x = x-11<0?0:x-11, \
- _p10##x = x-10<0?0:x-10, \
- _p9##x = x-9<0?0:x-9, \
- _p8##x = x-8<0?0:x-8, \
- _p7##x = x-7<0?0:x-7, \
- _p6##x = x-6<0?0:x-6, \
- _p5##x = x-5<0?0:x-5, \
- _p4##x = x-4<0?0:x-4, \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
- _n4##x = x+4>=(img).width()?(img).width()-1:x+4, \
- _n5##x = x+5>=(img).width()?(img).width()-1:x+5, \
- _n6##x = x+6>=(img).width()?(img).width()-1:x+6, \
- _n7##x = x+7>=(img).width()?(img).width()-1:x+7, \
- _n8##x = x+8>=(img).width()?(img).width()-1:x+8, \
- _n9##x = x+9>=(img).width()?(img).width()-1:x+9, \
- _n10##x = x+10>=(img).width()?(img).width()-1:x+10, \
- _n11##x = x+11>=(img).width()?(img).width()-1:x+11, \
- _n12##x = x+12>=(img).width()?(img).width()-1:x+12, \
- _n13##x = x+13>=(img).width()?(img).width()-1:x+13, \
- _n14##x = x+14>=(img).width()?(img).width()-1:x+14, \
- _n15##x = x+15>=(img).width()?(img).width()-1:x+15, \
+ _p15##x = x - 15<0?0:x - 15, \
+ _p14##x = x - 14<0?0:x - 14, \
+ _p13##x = x - 13<0?0:x - 13, \
+ _p12##x = x - 12<0?0:x - 12, \
+ _p11##x = x - 11<0?0:x - 11, \
+ _p10##x = x - 10<0?0:x - 10, \
+ _p9##x = x - 9<0?0:x - 9, \
+ _p8##x = x - 8<0?0:x - 8, \
+ _p7##x = x - 7<0?0:x - 7, \
+ _p6##x = x - 6<0?0:x - 6, \
+ _p5##x = x - 5<0?0:x - 5, \
+ _p4##x = x - 4<0?0:x - 4, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
+ _n4##x = x + 4>=(img).width()?(img).width() - 1:x + 4, \
+ _n5##x = x + 5>=(img).width()?(img).width() - 1:x + 5, \
+ _n6##x = x + 6>=(img).width()?(img).width() - 1:x + 6, \
+ _n7##x = x + 7>=(img).width()?(img).width() - 1:x + 7, \
+ _n8##x = x + 8>=(img).width()?(img).width() - 1:x + 8, \
+ _n9##x = x + 9>=(img).width()?(img).width() - 1:x + 9, \
+ _n10##x = x + 10>=(img).width()?(img).width() - 1:x + 10, \
+ _n11##x = x + 11>=(img).width()?(img).width() - 1:x + 11, \
+ _n12##x = x + 12>=(img).width()?(img).width() - 1:x + 12, \
+ _n13##x = x + 13>=(img).width()?(img).width() - 1:x + 13, \
+ _n14##x = x + 14>=(img).width()?(img).width() - 1:x + 14, \
+ _n15##x = x + 15>=(img).width()?(img).width() - 1:x + 15, \
  _n16##x = (int)( \
  (I[0] = (T)(img)(_p15##x,_p15##y,z,c)), \
  (I[32] = (T)(img)(_p15##x,_p14##y,z,c)), \
@@ -21312,7 +21312,7 @@
  (I[958] = (T)(img)(_n15##x,_n14##y,z,c)), \
  (I[990] = (T)(img)(_n15##x,_n15##y,z,c)), \
  (I[1022] = (T)(img)(_n15##x,_n16##y,z,c)), \
- x+16>=(img).width()?(img).width()-1:x+16); \
+ x + 16>=(img).width()?(img).width() - 1:x + 16); \
  x<=(int)(x1) && ((_n16##x<(img).width() && ( \
  (I[31] = (T)(img)(_n16##x,_p15##y,z,c)), \
  (I[63] = (T)(img)(_n16##x,_p14##y,z,c)), \
@@ -21420,7 +21420,7 @@
 #define cimg_for4x4x4(img,x,y,z,c,I,T) \
  cimg_for4((img)._depth,z) cimg_for4((img)._height,y) for (int x = 0, \
  _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
  _n2##x = (int)( \
  (I[0] = I[1] = (T)(img)(0,_p1##y,_p1##z,c)), \
  (I[4] = I[5] = (T)(img)(0,y,_p1##z,c)), \
@@ -21454,7 +21454,7 @@
  (I[54] = (T)(img)(_n1##x,y,_n2##z,c)), \
  (I[58] = (T)(img)(_n1##x,_n1##y,_n2##z,c)), \
  (I[62] = (T)(img)(_n1##x,_n2##y,_n2##z,c)), \
- 2>=((img)._width)?(img).width()-1:2); \
+ 2>=((img)._width)?(img).width() - 1:2); \
  (_n2##x<(img).width() && ( \
  (I[3] = (T)(img)(_n2##x,_p1##y,_p1##z,c)), \
  (I[7] = (T)(img)(_n2##x,y,_p1##z,c)), \
@@ -21493,8 +21493,8 @@
 
 #define cimg_for_in4x4x4(img,x0,y0,z0,x1,y1,z1,x,y,z,c,I,T) \
  cimg_for_in4((img)._depth,z0,z1,z) cimg_for_in4((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
  _n2##x = (int)( \
  (I[0] = (T)(img)(_p1##x,_p1##y,_p1##z,c)), \
  (I[4] = (T)(img)(_p1##x,y,_p1##z,c)), \
@@ -21544,7 +21544,7 @@
  (I[54] = (T)(img)(_n1##x,y,_n2##z,c)), \
  (I[58] = (T)(img)(_n1##x,_n1##y,_n2##z,c)), \
  (I[62] = (T)(img)(_n1##x,_n2##y,_n2##z,c)), \
- x+2>=(img).width()?(img).width()-1:x+2); \
+ x + 2>=(img).width()?(img).width() - 1:x + 2); \
  x<=(int)(x1) && ((_n2##x<(img).width() && ( \
  (I[3] = (T)(img)(_n2##x,_p1##y,_p1##z,c)), \
  (I[7] = (T)(img)(_n2##x,y,_p1##z,c)), \
@@ -21604,7 +21604,7 @@
 #define cimg_for5x5x5(img,x,y,z,c,I,T) \
  cimg_for5((img)._depth,z) cimg_for5((img)._height,y) for (int x = 0, \
  _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
  _n2##x = (int)( \
  (I[0] = I[1] = I[2] = (T)(img)(0,_p2##y,_p2##z,c)), \
  (I[5] = I[6] = I[7] = (T)(img)(0,_p1##y,_p2##z,c)), \
@@ -21656,7 +21656,7 @@
  (I[113] = (T)(img)(_n1##x,y,_n2##z,c)), \
  (I[118] = (T)(img)(_n1##x,_n1##y,_n2##z,c)), \
  (I[123] = (T)(img)(_n1##x,_n2##y,_n2##z,c)), \
- 2>=((img)._width)?(img).width()-1:2); \
+ 2>=((img)._width)?(img).width() - 1:2); \
  (_n2##x<(img).width() && ( \
  (I[4] = (T)(img)(_n2##x,_p2##y,_p2##z,c)), \
  (I[9] = (T)(img)(_n2##x,_p1##y,_p2##z,c)), \
@@ -21713,9 +21713,9 @@
 
 #define cimg_for_in5x5x5(img,x0,y0,z0,x1,y1,z1,x,y,z,c,I,T) \
  cimg_for_in5((img)._depth,z0,z1,z) cimg_for_in5((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
  _n2##x = (int)( \
  (I[0] = (T)(img)(_p2##x,_p2##y,_p2##z,c)), \
  (I[5] = (T)(img)(_p2##x,_p1##y,_p2##z,c)), \
@@ -21817,7 +21817,7 @@
  (I[113] = (T)(img)(_n1##x,y,_n2##z,c)), \
  (I[118] = (T)(img)(_n1##x,_n1##y,_n2##z,c)), \
  (I[123] = (T)(img)(_n1##x,_n2##y,_n2##z,c)), \
- x+2>=(img).width()?(img).width()-1:x+2); \
+ x + 2>=(img).width()?(img).width() - 1:x + 2); \
  x<=(int)(x1) && ((_n2##x<(img).width() && ( \
  (I[4] = (T)(img)(_n2##x,_p2##y,_p2##z,c)), \
  (I[9] = (T)(img)(_n2##x,_p1##y,_p2##z,c)), \
@@ -21904,8 +21904,8 @@
 #define cimg_for6x6x6(img,x,y,z,c,I,T) \
  cimg_for6((img)._depth,z) cimg_for6((img)._height,y) for (int x = 0, \
  _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
  _n3##x = (int)( \
  (I[0] = I[1] = I[2] = (T)(img)(0,_p2##y,_p2##z,c)), \
  (I[6] = I[7] = I[8] = (T)(img)(0,_p1##y,_p2##z,c)), \
@@ -22015,7 +22015,7 @@
  (I[202] = (T)(img)(_n2##x,_n1##y,_n3##z,c)), \
  (I[208] = (T)(img)(_n2##x,_n2##y,_n3##z,c)), \
  (I[214] = (T)(img)(_n2##x,_n3##y,_n3##z,c)), \
- 3>=((img)._width)?(img).width()-1:3); \
+ 3>=((img)._width)?(img).width() - 1:3); \
  (_n3##x<(img).width() && ( \
  (I[5] = (T)(img)(_n3##x,_p2##y,_p2##z,c)), \
  (I[11] = (T)(img)(_n3##x,_p1##y,_p2##z,c)), \
@@ -22094,10 +22094,10 @@
 
 #define cimg_for_in6x6x6(img,x0,y0,z0,x1,y1,z1,x,y,z,c,I,T) \
  cimg_for_in6((img)._depth,z0,z1,z) cimg_for_in6((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
  _n3##x = (int)( \
  (I[0] = (T)(img)(_p2##x,_p2##y,_p2##z,c)), \
  (I[6] = (T)(img)(_p2##x,_p1##y,_p2##z,c)), \
@@ -22279,7 +22279,7 @@
  (I[202] = (T)(img)(_n2##x,_n1##y,_n3##z,c)), \
  (I[208] = (T)(img)(_n2##x,_n2##y,_n3##z,c)), \
  (I[214] = (T)(img)(_n2##x,_n3##y,_n3##z,c)), \
- x+3>=(img).width()?(img).width()-1:x+3); \
+ x + 3>=(img).width()?(img).width() - 1:x + 3); \
  x<=(int)(x1) && ((_n3##x<(img).width() && ( \
  (I[5] = (T)(img)(_n3##x,_p2##y,_p2##z,c)), \
  (I[11] = (T)(img)(_n3##x,_p1##y,_p2##z,c)), \
@@ -22399,8 +22399,8 @@
 #define cimg_for7x7x7(img,x,y,z,c,I,T) \
  cimg_for7((img)._depth,z) cimg_for7((img)._height,y) for (int x = 0, \
  _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
  _n3##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = (T)(img)(0,_p3##y,_p3##z,c)), \
  (I[7] = I[8] = I[9] = I[10] = (T)(img)(0,_p2##y,_p3##z,c)), \
@@ -22549,7 +22549,7 @@
  (I[327] = (T)(img)(_n2##x,_n1##y,_n3##z,c)), \
  (I[334] = (T)(img)(_n2##x,_n2##y,_n3##z,c)), \
  (I[341] = (T)(img)(_n2##x,_n3##y,_n3##z,c)), \
- 3>=((img)._width)?(img).width()-1:3); \
+ 3>=((img)._width)?(img).width() - 1:3); \
  (_n3##x<(img).width() && ( \
  (I[6] = (T)(img)(_n3##x,_p3##y,_p3##z,c)), \
  (I[13] = (T)(img)(_n3##x,_p2##y,_p3##z,c)), \
@@ -22654,11 +22654,11 @@
 
 #define cimg_for_in7x7x7(img,x0,y0,z0,x1,y1,z1,x,y,z,c,I,T) \
  cimg_for_in7((img)._depth,z0,z1,z) cimg_for_in7((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
  _n3##x = (int)( \
  (I[0] = (T)(img)(_p3##x,_p3##y,_p3##z,c)), \
  (I[7] = (T)(img)(_p3##x,_p2##y,_p3##z,c)), \
@@ -22954,7 +22954,7 @@
  (I[327] = (T)(img)(_n2##x,_n1##y,_n3##z,c)), \
  (I[334] = (T)(img)(_n2##x,_n2##y,_n3##z,c)), \
  (I[341] = (T)(img)(_n2##x,_n3##y,_n3##z,c)), \
- x+3>=(img).width()?(img).width()-1:x+3); \
+ x + 3>=(img).width()?(img).width() - 1:x + 3); \
  x<=(int)(x1) && ((_n3##x<(img).width() && ( \
  (I[6] = (T)(img)(_n3##x,_p3##y,_p3##z,c)), \
  (I[13] = (T)(img)(_n3##x,_p2##y,_p3##z,c)), \
@@ -23113,9 +23113,9 @@
 #define cimg_for8x8x8(img,x,y,z,c,I,T) \
  cimg_for8((img)._depth,z) cimg_for8((img)._height,y) for (int x = 0, \
  _p3##x = 0, _p2##x = 0, _p1##x = 0, \
- _n1##x = 1>=((img)._width)?(img).width()-1:1, \
- _n2##x = 2>=((img)._width)?(img).width()-1:2, \
- _n3##x = 3>=((img)._width)?(img).width()-1:3, \
+ _n1##x = 1>=((img)._width)?(img).width() - 1:1, \
+ _n2##x = 2>=((img)._width)?(img).width() - 1:2, \
+ _n3##x = 3>=((img)._width)?(img).width() - 1:3, \
  _n4##x = (int)( \
  (I[0] = I[1] = I[2] = I[3] = (T)(img)(0,_p3##y,_p3##z,c)), \
  (I[8] = I[9] = I[10] = I[11] = (T)(img)(0,_p2##y,_p3##z,c)), \
@@ -23373,7 +23373,7 @@
  (I[494] = (T)(img)(_n3##x,_n2##y,_n4##z,c)), \
  (I[502] = (T)(img)(_n3##x,_n3##y,_n4##z,c)), \
  (I[510] = (T)(img)(_n3##x,_n4##y,_n4##z,c)), \
- 4>=((img)._width)?(img).width()-1:4); \
+ 4>=((img)._width)?(img).width() - 1:4); \
  (_n4##x<(img).width() && ( \
  (I[7] = (T)(img)(_n4##x,_p3##y,_p3##z,c)), \
  (I[15] = (T)(img)(_n4##x,_p2##y,_p3##z,c)), \
@@ -23508,12 +23508,12 @@
 
 #define cimg_for_in8x8x8(img,x0,y0,z0,x1,y1,z1,x,y,z,c,I,T) \
  cimg_for_in8((img)._depth,z0,z1,z) cimg_for_in8((img)._height,y0,y1,y) for (int x = (int)(x0)<0?0:(int)(x0), \
- _p3##x = x-3<0?0:x-3, \
- _p2##x = x-2<0?0:x-2, \
- _p1##x = x-1<0?0:x-1, \
- _n1##x = x+1>=(img).width()?(img).width()-1:x+1, \
- _n2##x = x+2>=(img).width()?(img).width()-1:x+2, \
- _n3##x = x+3>=(img).width()?(img).width()-1:x+3, \
+ _p3##x = x - 3<0?0:x - 3, \
+ _p2##x = x - 2<0?0:x - 2, \
+ _p1##x = x - 1<0?0:x - 1, \
+ _n1##x = x + 1>=(img).width()?(img).width() - 1:x + 1, \
+ _n2##x = x + 2>=(img).width()?(img).width() - 1:x + 2, \
+ _n3##x = x + 3>=(img).width()?(img).width() - 1:x + 3, \
  _n4##x = (int)( \
  (I[0] = (T)(img)(_p3##x,_p3##y,_p3##z,c)), \
  (I[8] = (T)(img)(_p3##x,_p2##y,_p3##z,c)), \
@@ -23963,7 +23963,7 @@
  (I[494] = (T)(img)(_n3##x,_n2##y,_n4##z,c)), \
  (I[502] = (T)(img)(_n3##x,_n3##y,_n4##z,c)), \
  (I[510] = (T)(img)(_n3##x,_n4##y,_n4##z,c)), \
- x+4>=(img).width()?(img).width()-1:x+4); \
+ x + 4>=(img).width()?(img).width() - 1:x + 4); \
  x<=(int)(x1) && ((_n4##x<(img).width() && ( \
  (I[7] = (T)(img)(_n4##x,_p3##y,_p3##z,c)), \
  (I[15] = (T)(img)(_n4##x,_p2##y,_p3##z,c)), \
@@ -24163,4 +24163,4 @@
  I[504] = (T)(img)(_p3##x,_n4##y,_n4##z,c), I[505] = (T)(img)(_p2##x,_n4##y,_n4##z,c), I[506] = (T)(img)(_p1##x,_n4##y,_n4##z,c), I[507] = (T)(img)(x,_n4##y,_n4##z,c), I[508] = (T)(img)(_n1##x,_n4##y,_n4##z,c), I[509] = (T)(img)(_n2##x,_n4##y,_n4##z,c), I[510] = (T)(img)(_n3##x,_n4##y,_n4##z,c), I[511] = (T)(img)(_n4##x,_n4##y,_n4##z,c);
 
 // End of the plug-in
-#endif
+#endif /* cimg_plugin_loop_macros */

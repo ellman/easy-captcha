@@ -4,15 +4,15 @@
 #include <string>
 
 
-
+using namespace v8;
 class cap {
 
  public:
-  static void create(const v8::FunctionCallbackInfo<v8::Value>& args);
+  static void create(const FunctionCallbackInfo<Value>& args);
   static int save();
   
  protected:
-  static std::string toCString(v8::Handle<v8::Value> strp);
+  static std::string toCString(Handle<Value> strp);
 
  private:
   cap();

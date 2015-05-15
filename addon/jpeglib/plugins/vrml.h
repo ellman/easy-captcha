@@ -119,7 +119,8 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
   }
 
   // Look for either geometry or appearance node.
-  while (cimg::strncasecmp(line,"geometry",8) && cimg::strncasecmp(line,"appearance",10) && !std::feof(nfile)) err = std::fscanf(nfile,"%1023[^\n] ",line);
+  while (cimg::strncasecmp(line,"geometry",8) && cimg::strncasecmp(line,"appearance",10) && !std::feof(nfile))
+    err = std::fscanf(nfile,"%1023[^\n] ",line);
   if (std::feof(nfile)) { // If none of these nodes are defined.
     if (!file) cimg::fclose(nfile);
     throw CImgIOException(_cimg_instance
@@ -130,9 +131,12 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
   std::vector<T> listePoints; // Intermediate list containing the points of the whole object.
   primitives.assign();
   colors.assign();
-  int nbPointsTotal = 0, nbPrimitives = 0; // Count the number of points of the whole object and the number of primitives.
+  // Count the number of points of the whole object and the number of primitives.
+  int nbPointsTotal = 0, nbPrimitives = 0;
   float r = 0.78f, g = 0.78f, b = 0.78f; // RGB level of the object, the object is gray by default.
-  bool colorDefined = true, multipleColors = false, textureTest = false; // Boolean used to know if a color is defined for an object, if this object has multiple colors or if the object has a texture
+  // Boolean used to know if a color is defined for an object,
+  // if this object has multiple colors or if the object has a texture
+  bool colorDefined = true, multipleColors = false, textureTest = false;
   char textureFile[1024] = { 0 }; // Variable containing the name of the image used as a texture
 
   while (!std::feof(nfile)) {
@@ -142,7 +146,7 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
       std::sscanf(line,"geometry %s",type);            // We are looking for the type of geometry to draw
       const CImg<float> coords = CImg<float>::empty(); // CImg used for the texturization of an object
       CImgList<tc> colorsTextured;                     // CImgList used for the texturization of the color of an object
-      CImgList<tf> primitivesTemp;                     // Intermediate CImgList used to update the primitives of the whole object
+      CImgList<tf> primitivesTemp;  // Intermediate CImgList used to update the primitives of the whole object
 
       if (!cimg::strncasecmp(type,"Box",3)) { // If the object to draw is a box
         while (cimg::strncasecmp(line,"size",4) && !std::feof(nfile)) // We are looking for the size of the box
@@ -156,34 +160,40 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         }
 
         float X = 0, Y = 0, Z = 0; // The width, height and depth of the box
-        if ((err = std::sscanf(line,"size %f %f %f[^\n] ",&X,&Y,&Z))!=3 && (err = std::sscanf(line,"size %f,%f,%f[^\n] ",&X,&Y,&Z))!=3) {
+        if ((err = std::sscanf(line,"size %f %f %f[^\n] ",&X,&Y,&Z))!=3 &&
+            (err = std::sscanf(line,"size %f,%f,%f[^\n] ",&X,&Y,&Z))!=3) {
           if (!file) cimg::fclose(nfile);
           throw CImgIOException(_cimg_instance
                                 "load_vrml() : Failed to read box size in file '%s'.",
                                 cimg_instance,filename?filename:"(FILE*)");
         }
-        const CImg<T> pointsTemp = CImg<T>::box3d(primitivesTemp,(T)X,(T)Y,(T)Z); // We generate the primitives and the points of the box
+        // We generate the primitives and the points of the box
+        const CImg<T> pointsTemp = CImg<T>::box3d(primitivesTemp,(T)X,(T)Y,(T)Z);
 
         nbPrimitives = primitivesTemp.size(); // We save the number of primitives of the object
 
         if (textureTest) { // If the object has a texture
-          const CImg<float> texture(textureFile);                                      // We put the image used as a texture into a CImg object
-          colorsTextured.insert(primitivesTemp.size(),CImg<unsigned char>::vector(0,50,250));   // We initialize the colorsTextured list
-          pointsTemp.texturize_object3d(primitivesTemp,colorsTextured,texture,coords); // We texturize the object
+          // We put the image used as a texture into a CImg object
+          const CImg<float> texture(textureFile);
+          // We initialize the colorsTextured list
+          colorsTextured.insert(primitivesTemp.size(),CImg<unsigned char>::vector(0,50,250));
+          // We texturize the object
+          pointsTemp.texturize_object3d(primitivesTemp,colorsTextured,texture,coords);
           nbPrimitives = 0;
         }
 
         if(nbPointsTotal) { // If there are already some objects in the scene
           for (int j=0;j<(int)primitivesTemp.size();j++) {
             for(int i=0;i<4;i++)
-              primitivesTemp(j).at(i) += (tf)nbPointsTotal; // We shift the indices in the primitives to designate the right points
+              // We shift the indices in the primitives to designate the right points
+              primitivesTemp(j).at(i) += (tf)nbPointsTotal;
           }
         }
         primitives.push_back(primitivesTemp); // We add the primitives of the box to the general primitives variable
         for(int i=0;i<(int)pointsTemp.size()/3;++i) { // We add the points into the temporary list in the right order
           listePoints.push_back((T)pointsTemp.at(i));
-          listePoints.push_back((T)pointsTemp.at(i+8));
-          listePoints.push_back((T)pointsTemp.at(i+16));
+          listePoints.push_back((T)pointsTemp.at(i + 8));
+          listePoints.push_back((T)pointsTemp.at(i + 16));
         }
         nbPointsTotal += pointsTemp.size()/3; // We increase the number of points of the whole object
       }
@@ -194,22 +204,29 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : radius of sphere not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : radius of sphere not defined in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
 
         float R = 0;
         if ((err = std::sscanf(line,"radius %f[^\n] ",&R))!=1) { // We get the radius of the sphere
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : Failed to read sphere radius in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : Failed to read sphere radius in file '%s'.",
+                                cimg_instance,filename?filename:"(FILE*)");
         }
-        const CImg<T> pointsTemp = CImg<T>::sphere3d(primitivesTemp,(T)R); // Compute the necessary points and primitives for a sphere of radius R
-
-        nbPrimitives = primitivesTemp.size(); // We get the number of primitives to used on the attribution of a color, in case no specific color is defined
+        // Compute the necessary points and primitives for a sphere of radius R
+        const CImg<T> pointsTemp = CImg<T>::sphere3d(primitivesTemp,(T)R);
+        // We get the number of primitives to used on the attribution of a color, in case no specific color is defined
+        nbPrimitives = primitivesTemp.size();
 
         if(textureTest) { // If the object has a texture
-          const CImg<float> texture(textureFile);                                      // We put the image used as a texture into a CImg object
-          colorsTextured.insert(primitivesTemp.size(),CImg<unsigned char>::vector(0,50,250));   // We initialize the colorsTextured list
+          // We put the image used as a texture into a CImg object
+          const CImg<float> texture(textureFile);
+          // We initialize the colorsTextured list
+          colorsTextured.insert(primitivesTemp.size(),CImg<unsigned char>::vector(0,50,250));
           pointsTemp.texturize_object3d(primitivesTemp,colorsTextured,texture,coords); // We texturize the object
           nbPrimitives = 0; // We set to 0 because there is no color to use
         }
@@ -224,8 +241,8 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         primitives.push_back(primitivesTemp);
         for(int i=0;i<(int)pointsTemp.size()/3;++i) {
           listePoints.push_back((T)pointsTemp.at(i));
-          listePoints.push_back((T)pointsTemp.at(i+pointsTemp.size()/3));
-          listePoints.push_back((T)pointsTemp.at(i+2*pointsTemp.size()/3));
+          listePoints.push_back((T)pointsTemp.at(i + pointsTemp.size()/3));
+          listePoints.push_back((T)pointsTemp.at(i + 2*pointsTemp.size()/3));
         }
         nbPointsTotal += pointsTemp.size()/3;
       }
@@ -236,13 +253,17 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : bottom radius and height of cone not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : bottom radius and height of cone not defined in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
         else if(!cimg::strncasecmp(line,"bottomRadius",12)) { // We find the bottom radius of the cone first
           if ((err = std::sscanf(line,"bottomRadius %f[^\n] ",&R))!=1) { // We get the radius into the variable R
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : Failed to read cone bottomRadius in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : Failed to read cone bottomRadius in file '%s'.",
+                                  cimg_instance,filename?filename:"(FILE*)");
           }
           while(!std::feof(nfile) && cimg::strncasecmp(line,"height",6)) // We look for the height of the cone
             err = std::fscanf(nfile,"%1023[^\n] ",line);
@@ -250,20 +271,26 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
           if(std::feof(nfile)) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : height of cone not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : height of cone not defined in file '%s'.",
+                                  cimg_instance, filename?filename:"(FILE*)");
           }
 
           if ((err = std::sscanf(line,"height %f[^\n] ",&H))!=1) { // We get the height into the variable H
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : Failed to read cone height in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : Failed to read cone height in file '%s'.",
+                                  cimg_instance,filename?filename:"(FILE*)");
           }
         }
         else { // We find the height of the cone first
           if ((err = std::sscanf(line,"height %f[^\n] ",&H))!=1) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : Failed to read cone height in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : Failed to read cone height in file '%s'.",
+                                  cimg_instance,filename?filename:"(FILE*)");
           }
           while(!std::feof(nfile) && cimg::strncasecmp(line,"bottomRadius",12))
             err = std::fscanf(nfile,"%1023[^\n] ",line);
@@ -271,22 +298,29 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
           if(std::feof(nfile)) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : bottom radius of cone not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : bottom radius of cone not defined in file '%s'.",
+                                  cimg_instance, filename?filename:"(FILE*)");
           }
 
           if ((err = std::sscanf(line,"bottomRadius %f[^\n] ",&R))!=1) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : Failed to read cone bottom radius in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : Failed to read cone bottom radius in file '%s'.",
+                                  cimg_instance,filename?filename:"(FILE*)");
           }
         }
-        const CImg<T> pointsTemp = CImg<T>::cone3d(primitivesTemp,(T)R,(T)H); // Compute the necessary points and primitives for a cone of radius R and height H
+        // Compute the necessary points and primitives for a cone of radius R and height H
+        const CImg<T> pointsTemp = CImg<T>::cone3d(primitivesTemp,(T)R,(T)H);
 
         nbPrimitives = primitivesTemp.size();
 
         if(textureTest) { // If the object has a texture
-          const CImg<float> texture(textureFile);                                      // We put the image used as a texture into a CImg object
-          colorsTextured.insert(primitivesTemp.size(),CImg<unsigned char>::vector(0,50,250));   // We initialize the colorsTextured list
+          // We put the image used as a texture into a CImg object
+          const CImg<float> texture(textureFile);
+          // We initialize the colorsTextured list
+          colorsTextured.insert(primitivesTemp.size(),CImg<unsigned char>::vector(0,50,250));
           pointsTemp.texturize_object3d(primitivesTemp,colorsTextured,texture,coords); // We texturize the object
           nbPrimitives = 0;
         }
@@ -301,8 +335,8 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         primitives.push_back(primitivesTemp);
         for(int i=0;i<(int)pointsTemp.size()/3;++i) {
           listePoints.push_back((T)pointsTemp.at(i));
-          listePoints.push_back((T)pointsTemp.at(i+pointsTemp.size()/3));
-          listePoints.push_back((T)pointsTemp.at(i+2*pointsTemp.size()/3));
+          listePoints.push_back((T)pointsTemp.at(i + pointsTemp.size()/3));
+          listePoints.push_back((T)pointsTemp.at(i + 2*pointsTemp.size()/3));
         }
         nbPointsTotal += pointsTemp.size()/3;
       }
@@ -313,13 +347,17 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : radius or height of cylinder not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : radius or height of cylinder not defined in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
         else if(!cimg::strncasecmp(line,"radius",6)) { // If we find the radius first
           if ((err = std::sscanf(line,"radius %f[^\n] ",&R))!=1) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : Failed to read cylinder radius in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : Failed to read cylinder radius in file '%s'.",
+                                  cimg_instance,filename?filename:"(FILE*)");
           }
           while(!std::feof(nfile) && cimg::strncasecmp(line,"height",6)) // We now look for the height of the cylinder
             err = std::fscanf(nfile,"%1023[^\n] ",line);
@@ -327,20 +365,26 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
           if(std::feof(nfile)) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : height of cylinder not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : height of cylinder not defined in file '%s'.",
+                                  cimg_instance, filename?filename:"(FILE*)");
           }
 
           if ((err = std::sscanf(line,"height %f[^\n] ",&H))!=1) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : Failed to read cylinder height in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : Failed to read cylinder height in file '%s'.",
+                                  cimg_instance,filename?filename:"(FILE*)");
           }
         }
         else { // If we find the height first
           if ((err = std::sscanf(line,"height %f[^\n] ",&H))!=1) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : Failed to read cylinder height in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : Failed to read cylinder height in file '%s'.",
+                                  cimg_instance,filename?filename:"(FILE*)");
           }
           while(!std::feof(nfile) && cimg::strncasecmp(line,"radius",6))// We now look for the radius of the cylinder
             err = std::fscanf(nfile,"%1023[^\n] ",line);
@@ -348,20 +392,27 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
           if(std::feof(nfile)) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : radius of cylinder not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : radius of cylinder not defined in file '%s'.",
+                                  cimg_instance, filename?filename:"(FILE*)");
           }
 
           if ((err = std::sscanf(line,"radius %f[^\n] ",&R))!=1) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : Failed to read cylinder radius in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : Failed to read cylinder radius in file '%s'.",
+                                  cimg_instance,filename?filename:"(FILE*)");
           }
         }
-        const CImg<T> pointsTemp = CImg<T>::cylinder3d(primitivesTemp,(T)R,(T)H); // Compute the necessary points and primitives for a cylinder of radius R and height H
+        // Compute the necessary points and primitives for a cylinder of radius R and height H
+        const CImg<T> pointsTemp = CImg<T>::cylinder3d(primitivesTemp,(T)R,(T)H);
 
         if(textureTest) { // If the object has a texture
-          const CImg<float> texture(textureFile);                                      // We put the image used as a texture into a CImg object
-          colorsTextured.insert(primitivesTemp.size(),CImg<unsigned char>::vector(0,50,250));   // We initialize the colorsTextured list
+          // We put the image used as a texture into a CImg object
+          const CImg<float> texture(textureFile);
+          // We initialize the colorsTextured list
+          colorsTextured.insert(primitivesTemp.size(),CImg<unsigned char>::vector(0,50,250));
           pointsTemp.texturize_object3d(primitivesTemp,colorsTextured,texture,coords); // We texturize the object
           nbPrimitives = 0;
         }
@@ -378,8 +429,8 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         primitives.push_back(primitivesTemp);
         for(int i=0;i<(int)pointsTemp.size()/3;++i) {
           listePoints.push_back((T)pointsTemp.at(i));
-          listePoints.push_back((T)pointsTemp.at(i+pointsTemp.size()/3));
-          listePoints.push_back((T)pointsTemp.at(i+2*pointsTemp.size()/3));
+          listePoints.push_back((T)pointsTemp.at(i + pointsTemp.size()/3));
+          listePoints.push_back((T)pointsTemp.at(i + 2*pointsTemp.size()/3));
         }
         nbPointsTotal += pointsTemp.size()/3;
       }
@@ -390,15 +441,19 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : points of pointSet node not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : points of pointSet node not defined in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
 
         err = std::fscanf(nfile,"%1023[^\n] ",line);
         int nbPoints = 0;
 
-        while(cimg::strncasecmp(line,"]",1) && !std::feof(nfile)) { // while we did not get all the points and while we are not at the end of the file
-          float X=0,Y=0,Z=0;
-          if ((err = std::sscanf(line,"%f %f %f,[^\n] ",&X,&Y,&Z))==3 || (err = std::sscanf(line,"%f,%f,%f,[^\n] ",&X,&Y,&Z))==3) {
+        while(cimg::strncasecmp(line,"]",1) && !std::feof(nfile)) {
+          // while we did not get all the points and while we are not at the end of the file
+          float X = 0, Y = 0, Z = 0;
+          if ((err = std::sscanf(line,"%f %f %f,[^\n] ",&X,&Y,&Z))==3 ||
+              (err = std::sscanf(line,"%f,%f,%f,[^\n] ",&X,&Y,&Z))==3) {
             // We get the coordinates of all the points and store them into a list of points
             listePoints.push_back((T)X);
             listePoints.push_back((T)Y);
@@ -410,7 +465,9 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : bad structure of pointSet node in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : bad structure of pointSet node in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
         primitivesTemp.assign();
 
@@ -431,20 +488,26 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
 
         nbPointsTotal += nbPoints;
       }
-      else if(!cimg::strncasecmp(type,"IndexedLineSet",14) || !cimg::strncasecmp(type,"IndexedFaceSet",14)) { // If the object to draw is a set of lines or a set of faces
+      else if(!cimg::strncasecmp(type,"IndexedLineSet",14) ||
+              !cimg::strncasecmp(type,"IndexedFaceSet",14)) {
+        // If the object to draw is a set of lines or a set of faces
         while(cimg::strncasecmp(line,"point [",7) && !std::feof(nfile))
           err = std::fscanf(nfile,"%1023[^\n] ",line);
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : points of IndexedSet node not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : points of IndexedSet node not defined in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
 
         err = std::fscanf(nfile,"%1023[^\n] ",line);
         int nbPoints = 0;
-        while(cimg::strncasecmp(line,"]",1) && !std::feof(nfile)) { // As long as there are points defined we add them to the list
+        while(cimg::strncasecmp(line,"]",1) && !std::feof(nfile)) {
+          // As long as there are points defined we add them to the list
           float X=0,Y=0,Z=0;
-          if ((err = std::sscanf(line,"%f %f %f,[^\n] ",&X,&Y,&Z))==3 || (err = std::sscanf(line,"%f,%f,%f,[^\n] ",&X,&Y,&Z))==3) {
+          if ((err = std::sscanf(line,"%f %f %f,[^\n] ",&X,&Y,&Z))==3 ||
+              (err = std::sscanf(line,"%f,%f,%f,[^\n] ",&X,&Y,&Z))==3) {
             // We get the coordinates of the points into a list of points
             listePoints.push_back((T)X);
             listePoints.push_back((T)Y);
@@ -456,17 +519,22 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : bad structure of point vector node in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : bad structure of point vector node in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
 
         primitivesTemp.assign();
 
-        while(cimg::strncasecmp(line,"coordIndex [",12) && !std::feof(nfile)) // We are looking for the index of the points
+        while(cimg::strncasecmp(line,"coordIndex [",12) && !std::feof(nfile))
+          // We are looking for the index of the points
           err = std::fscanf(nfile,"%1023[^\n] ",line);
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : coordIndex not furnished for IndexedSet node in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : coordIndex not furnished for IndexedSet node in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
 
         err = std::fscanf(nfile,"%1023[^\n] ",line);
@@ -494,7 +562,9 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : bad structure of coordIndex in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : bad structure of coordIndex in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
 
         if(nbPointsTotal) {
@@ -513,18 +583,23 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : bad structure of coordIndex in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : bad structure of coordIndex in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
         else if(!cimg::strncasecmp(line,"color [",7)) { // If there are different colors defined for each faces
           multipleColors = true;
           std::vector<CImg<tc> > listColors;
           err = std::fscanf(nfile,"%1023[^\n] ",line);
-          while(cimg::strncasecmp(line,"]",1) && !std::feof(nfile)) { // We add the list of all colors defined into the vector listColors
+          while(cimg::strncasecmp(line,"]",1) && !std::feof(nfile)) {
+            // We add the list of all colors defined into the vector listColors
             if(*line!='#') {
               if ((err = std::sscanf(line,"%f %f %f[^\n] ",&r,&g,&b))!=3) {
                 if (!file)
                   cimg::fclose(nfile);
-                throw CImgIOException(_cimg_instance "load_vrml() : wrong number of color furnished in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+                throw CImgIOException(_cimg_instance
+                                      "load_vrml() : wrong number of color furnished in file '%s'.",
+                                      cimg_instance,filename?filename:"(FILE*)");
               }
               CImg<tc> img(3,1,1,1,(tc)(r*255),(tc)(g*255),(tc)(b*255));
               listColors.push_back(img);
@@ -534,7 +609,9 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
           if(std::feof(nfile)) {
             if (!file)
               cimg::fclose(nfile);
-            throw CImgIOException(_cimg_instance "load_vrml() : bad structure of color in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+            throw CImgIOException(_cimg_instance
+                                  "load_vrml() : bad structure of color in file '%s'.",
+                                  cimg_instance, filename?filename:"(FILE*)");
           }
           else {
             while(cimg::strncasecmp(line,"colorIndex [",12) && !std::feof(nfile))
@@ -542,16 +619,21 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
             if(std::feof(nfile)) {
               if (!file)
                 cimg::fclose(nfile);
-              throw CImgIOException(_cimg_instance "load_vrml() : colorIndex not furnished for Color node in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+              throw CImgIOException(_cimg_instance
+                                    "load_vrml() : colorIndex not furnished for Color node in file '%s'.",
+                                    cimg_instance, filename?filename:"(FILE*)");
             }
             err = std::fscanf(nfile,"%1023[^\n] ",line);
-            while(cimg::strncasecmp(line,"]",1) && !std::feof(nfile)) { // We add the colors at the right index into the vector colors
+            while(cimg::strncasecmp(line,"]",1) && !std::feof(nfile)) {
+              // We add the colors at the right index into the vector colors
               if(*line!='#') {
                 char * pch;
                 pch = std::strtok (line," ");
                 while (pch != NULL) {
                   int indice = std::atoi(pch);
-                  colors.insert(CImg<tc>::vector((tc)(listColors[indice])[0],(tc)(listColors[indice])[1],(tc)(listColors[indice])[2]));
+                  colors.insert(CImg<tc>::vector((tc)(listColors[indice])[0],
+                                                 (tc)(listColors[indice])[1],
+                                                 (tc)(listColors[indice])[2]));
                   pch = std::strtok (NULL, " ");
                 }
               }
@@ -561,23 +643,32 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         }
       }
       else // If none of the known type of shape is defined
-        cimg::warn(_cimg_instance "load_vrml() : Failed to read type of geometry to draw from file '%s'.", cimg_instance,filename?filename:"(FILE*)");
+        cimg::warn(_cimg_instance
+                   "load_vrml() : Failed to read type of geometry to draw from file '%s'.",
+                   cimg_instance,filename?filename:"(FILE*)");
 
       if(textureTest) { // If the object considered is texturized
         colors.push_back(colorsTextured);
         *textureFile = 0;
       }
-      while(cimg::strncasecmp(line,"appearance",10) && cimg::strncasecmp(line,"Shape",5) && !std::feof(nfile)) // We look for the node appearance or for another shape
+      while(cimg::strncasecmp(line,"appearance",10) &&
+            cimg::strncasecmp(line,"Shape",5) && !std::feof(nfile))
+        // We look for the node appearance or for another shape
         err = std::fscanf(nfile,"%1023[^\n] ",line);
     }
     if(!cimg::strncasecmp(line,"appearance",10)) { // We are at the appearance node
-      while(cimg::strncasecmp(line,"texture ImageTexture",20) && cimg::strncasecmp(line,"diffuseColor",12) && !std::feof(nfile)) // We are looking for a valid appearance node
+      while(cimg::strncasecmp(line,"texture ImageTexture",20) &&
+            cimg::strncasecmp(line,"diffuseColor",12) && !std::feof(nfile))
+        // We are looking for a valid appearance node
         err = std::fscanf(nfile,"%1023[^\n] ",line);
       if(!cimg::strncasecmp(line,"diffuseColor",12)) { // If the object as a unique diffuse color
-        if ((err = std::sscanf(line,"diffuseColor %f,%f,%f[^\n] ",&r,&g,&b))!=3 && (err = std::sscanf(line,"diffuseColor %f %f %f[^\n] ",&r,&g,&b))!=3) {
+        if ((err = std::sscanf(line,"diffuseColor %f,%f,%f[^\n] ",&r,&g,&b))!=3 &&
+            (err = std::sscanf(line,"diffuseColor %f %f %f[^\n] ",&r,&g,&b))!=3) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : wrong number of color furnished in file '%s'.",cimg_instance,filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : wrong number of color furnished in file '%s'.",
+                                cimg_instance,filename?filename:"(FILE*)");
         }
       }
       else if(!cimg::strncasecmp(line,"texture ImageTexture",20)) { // If there is a texture defined in the VRML file
@@ -588,10 +679,12 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
         if(std::feof(nfile)) {
           if (!file)
             cimg::fclose(nfile);
-          throw CImgIOException(_cimg_instance "load_vrml() : texture not defined in file '%s'.",cimg_instance, filename?filename:"(FILE*)");
+          throw CImgIOException(_cimg_instance
+                                "load_vrml() : texture not defined in file '%s'.",
+                                cimg_instance, filename?filename:"(FILE*)");
         }
-        std::sscanf(line,"url [%s][^\n] ",textureFileTemp); // We temporary put the name of the texture image into textureFileTemp
-
+        // We temporary put the name of the texture image into textureFileTemp
+        std::sscanf(line,"url [%s][^\n] ",textureFileTemp);
         char * pch;
         pch = std::strtok (textureFileTemp,"\"");
         strcpy(textureFile,pch); // We put the url of the texture image into textureFile
@@ -600,7 +693,9 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
     else if(!cimg::strncasecmp(line,"Shape",5)) // We have another shape node
       textureTest = false; // We reinitialize the texture boolean
 
-    if(nbPrimitives && colorDefined && !multipleColors && !textureTest) { // If there is only one color defined we add it to the colors CImgList or if no color is defined for an object, we add the default color
+    if(nbPrimitives && colorDefined && !multipleColors && !textureTest) {
+      // If there is only one color defined we add it to the colors CImgList or if no color
+      // is defined for an object, we add the default color
       CImgList<tc> colorsTemp;
       colorsTemp.insert(nbPrimitives,CImg<tc>::vector((tc)(r*255),(tc)(g*255),(tc)(b*255)));
       colors.push_back(colorsTemp);
@@ -615,8 +710,8 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
   assign(listePoints.size()/3,3);
   cimg_forX(*this,l) { // We add the points coordinates to the calling object
     (*this)(l,0) = (T)(listePoints.at(l*3));
-    (*this)(l,1) = (T)(listePoints.at(l*3+1));
-    (*this)(l,2) = (T)(listePoints.at(l*3+2));
+    (*this)(l,1) = (T)(listePoints.at(l*3 + 1));
+    (*this)(l,2) = (T)(listePoints.at(l*3 + 2));
   }
 
   if (!file)
@@ -627,19 +722,22 @@ CImg<T>& _load_vrml(std::FILE *const file, const char *const filename,CImgList<t
 
 //! Save VRML files.
 template<typename tf, typename tc>
-const CImg<T>& save_vrml(const char *const filename,const CImgList<tf>& primitives, const CImgList<tc>& colors, const char *const texturefile = 0) const {
+const CImg<T>& save_vrml(const char *const filename,const CImgList<tf>& primitives,
+                         const CImgList<tc>& colors, const char *const texturefile = 0) const {
   return _save_vrml(0,filename,primitives,colors,texturefile);
 }
 
 //! Save VRML files.
 template<typename tf, typename tc>
-const CImg<T>& save_vrml(std::FILE *const file,const CImgList<tf>& primitives, const CImgList<tc>& colors, const char *const texturefile = 0) const {
+const CImg<T>& save_vrml(std::FILE *const file,const CImgList<tf>& primitives,
+                         const CImgList<tc>& colors, const char *const texturefile = 0) const {
   return _save_vrml(file,0,primitives,colors,texturefile);
 }
 
 // Save VRML files (internal).
 template<typename tf, typename tc>
-const CImg<T>& _save_vrml(std::FILE *const file, const char *const filename,const CImgList<tf>& primitives, const CImgList<tc>& colors, const char *const texturefile) const {
+const CImg<T>& _save_vrml(std::FILE *const file, const char *const filename, const CImgList<tf>& primitives,
+                          const CImgList<tc>& colors, const char *const texturefile) const {
 
   // Check that the user furnished a file to save the object and that the object is not empty.
   if (!file && !filename)
@@ -655,7 +753,9 @@ const CImg<T>& _save_vrml(std::FILE *const file, const char *const filename,cons
   CImgList<T> opacities;
   char error_message[1024] = {0};
   if (!is_object3d(primitives,colors,opacities,true,error_message))
-    throw CImgInstanceException(_cimg_instance "save_vrml() : Invalid specified 3d object, for file '%s' (%s).",cimg_instance,filename?filename:"(FILE*)",error_message);
+    throw CImgInstanceException(_cimg_instance
+                                "save_vrml() : Invalid specified 3d object, for file '%s' (%s).",
+                                cimg_instance,filename?filename:"(FILE*)",error_message);
   const CImg<tc> default_color(1,3,1,1,200);
 
   // We open the file in which we will save the 3D object.
@@ -708,10 +808,12 @@ const CImg<T>& _save_vrml(std::FILE *const file, const char *const filename,cons
       std::fprintf(nfile,"\t\t\t%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,1));
       break;
     case 3 :
-      std::fprintf(nfile,"\t\t\t%u,%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,2),(unsigned int)primitives(l,1));
+      std::fprintf(nfile,"\t\t\t%u,%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,2),
+                   (unsigned int)primitives(l,1));
       break;
     case 4 :
-      std::fprintf(nfile,"\t\t\t%u,%u,%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,3),(unsigned int)primitives(l,2),(unsigned int)primitives(l,1));
+      std::fprintf(nfile,"\t\t\t%u,%u,%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,3),
+                   (unsigned int)primitives(l,2),(unsigned int)primitives(l,1));
       break;
     case 6 : {
       const unsigned int xt = (unsigned int)primitives(l,2), yt = (unsigned int)primitives(l,3);
@@ -725,14 +827,16 @@ const CImg<T>& _save_vrml(std::FILE *const file, const char *const filename,cons
       r = color.atXY(xt,yt,0)/255.0f;
       g = (csiz>1?color.atXY(xt,yt,1):r)/255.0f;
       b = (csiz>2?color.atXY(xt,yt,2):g)/255.0f;
-      std::fprintf(nfile,"\t\t\t%u,%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,2),(unsigned int)primitives(l,1));
+      std::fprintf(nfile,"\t\t\t%u,%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,2),
+                   (unsigned int)primitives(l,1));
     } break;
     case 12 : {
       const unsigned int xt = (unsigned int)primitives(l,4), yt = (unsigned int)primitives(l,5);
       r = color.atXY(xt,yt,0)/255.0f;
       g = (csiz>1?color.atXY(xt,yt,1):r)/255.0f;
       b = (csiz>2?color.atXY(xt,yt,2):g)/255.0f;
-      std::fprintf(nfile,"\t\t\t%u,%u,%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,3),(unsigned int)primitives(l,2),(unsigned int)primitives(l,1));
+      std::fprintf(nfile,"\t\t\t%u,%u,%u,%u,-1\n",(unsigned int)primitives(l,0),(unsigned int)primitives(l,3),
+                   (unsigned int)primitives(l,2),(unsigned int)primitives(l,1));
     } break;
     }
     if (!sameColor) { // If there are different colors we store on every loop the RGB values into the vector listColor
@@ -763,7 +867,8 @@ const CImg<T>& _save_vrml(std::FILE *const file, const char *const filename,cons
   std::fprintf(nfile,"\t\t]\n");
 
   if (texturefile) // If we have a texture instead of a color
-    std::fprintf(nfile,"\n\t}\n\tappearance DEF theTexture Appearance {\n\t\ttexture ImageTexture {\n\t\t\turl [\"%s\"]\n\t\t}\n\t}\n}",
+    std::fprintf(nfile,"\n\t}\n\tappearance DEF theTexture Appearance "
+                 "{\n\t\ttexture ImageTexture {\n\t\t\turl [\"%s\"]\n\t\t}\n\t}\n}",
                  texturefile);
   else {
     if(!sameColor) { // If there are different colors we add all of them
@@ -777,7 +882,8 @@ const CImg<T>& _save_vrml(std::FILE *const file, const char *const filename,cons
       std::fprintf(nfile,"\n\t]\n\t}\n}");
     }
     else { // If there is only one color we add it with the Material node
-      std::fprintf(nfile,"\t}\n\tappearance Appearance {\n\t\tmaterial Material {\n\t\t\tdiffuseColor %f,%f,%f\n\t\t}\n\t}\n}",
+      std::fprintf(nfile,"\t}\n\tappearance Appearance "
+                   "{\n\t\tmaterial Material {\n\t\t\tdiffuseColor %f,%f,%f\n\t\t}\n\t}\n}",
                    colors[0][0]/255.0f,colors[0][1]/255.0f,colors[0][2]/255.0f);
     }
   }
@@ -785,4 +891,4 @@ const CImg<T>& _save_vrml(std::FILE *const file, const char *const filename,cons
   return *this;
 }
 
-#endif
+#endif /* cimg_plugin_vrml */

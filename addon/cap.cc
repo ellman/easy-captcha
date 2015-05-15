@@ -38,8 +38,8 @@ args
 return 文件的生成路径给node
 */
 void cap::create(const FunctionCallbackInfo<Value>& args) {
-  Isolate* isolate = Isolate::New();
-  EscapableHandleScope handle_scope(isolate);
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
 
   
   img_obj::text = toCString(args[0]->ToString());
@@ -56,7 +56,7 @@ void cap::create(const FunctionCallbackInfo<Value>& args) {
 
   save();  
   
-  //ReturnValue::Set(String::NewFromUtf8(isolate, (img_obj::filename).c_str(), String::kInternalizedString));
+  args.GetReturnValue().Set(String::NewFromUtf8(isolate, (img_obj::filename).c_str()));
 }
 
 
