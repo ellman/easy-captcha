@@ -10,10 +10,10 @@ void Init(Handle<Object> target) {
 
 //hcap
 
-  Isolate* isolate = /* ... */;
+  Isolate* isolate = Isolate::New();
 
   target->Set(String::NewFromUtf8(isolate, "create", v8::String::kInternalizedString),
-           FunctionTemplate::New(cap::create)->GetFunction());
+           FunctionTemplate::New(isolate, cap::create)->GetFunction());
 
 }
 

@@ -8,7 +8,7 @@
 class cap {
 
  public:
-  static void create(const FunctionCallbackInfo<value>& args);
+  static void create(const v8::FunctionCallbackInfo<v8::Value>& args);
   static int save();
   
  protected:

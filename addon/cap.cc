@@ -12,6 +12,8 @@
 using namespace v8;
 using namespace cimg_library;
 
+
+
 namespace img_obj{
 	std::string text;
 	std::string filename;
@@ -35,8 +37,9 @@ args
 5-偏移
 return 文件的生成路径给node
 */
-void cap::create(const FunctionCallbackInfo<value>& args) {
-  HandleScope scope;
+void cap::create(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::New();
+  EscapableHandleScope handle_scope(isolate);
 
   
   img_obj::text = toCString(args[0]->ToString());
@@ -53,7 +56,7 @@ void cap::create(const FunctionCallbackInfo<value>& args) {
 
   save();  
   
-  return scope.Close(String::New((img_obj::filename).c_str()));
+  //ReturnValue::Set(String::NewFromUtf8(isolate, (img_obj::filename).c_str(), String::kInternalizedString));
 }
 
 
@@ -63,7 +66,7 @@ int cap::save(){
 
    const char *captcha_text((img_obj::text).c_str());
    const char *file_o((img_obj::filename).c_str());
-   int count(img_obj::count);
+   uint count(img_obj::count);
    int width(img_obj::width);
    int height(img_obj::height);
    int offset(img_obj::offset);
