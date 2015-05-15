@@ -10,7 +10,9 @@ void Init(Handle<Object> target) {
 
 //hcap
 
-  target->Set(String::NewSymbol("create"),
+  Isolate* isolate = /* ... */;
+
+  target->Set(String::NewFromUtf8(isolate, "create", v8::String::kInternalizedString),
            FunctionTemplate::New(cap::create)->GetFunction());
 
 }

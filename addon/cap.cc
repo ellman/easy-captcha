@@ -35,7 +35,7 @@ args
 5-偏移
 return 文件的生成路径给node
 */
-Handle<Value> cap::create(const Arguments& args) {
+void cap::create(const FunctionCallbackInfo<value>& args) {
   HandleScope scope;
 
   
