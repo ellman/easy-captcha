@@ -92,7 +92,7 @@ typedef my_source_mgr *my_src_ptr;
 static boolean fill_minput_buffer(j_decompress_ptr cinfo) {
   my_src_mptr src = (my_src_mptr) cinfo->src;
   size_t nbytes;
-  if (src->indexinmem+INPUT_BUF_SIZE>src->lenght) nbytes=src->lenght-src->indexinmem;
+  if (src->indexinmem + INPUT_BUF_SIZE>src->lenght) nbytes=src->lenght - src->indexinmem;
   else nbytes = INPUT_BUF_SIZE;
   std::memcpy(src->buffer,src->inmem,nbytes);
   src->inmem += nbytes;
@@ -140,9 +140,11 @@ static void jpeg_mem_src(j_decompress_ptr cinfo, JOCTET * memptr,int lenght) {
 
   // first time for this JPEG object?
   if (cinfo->src == NULL) {
-    cinfo->src = (struct jpeg_source_mgr*)(*cinfo->mem->alloc_small)((j_common_ptr) cinfo, JPOOL_PERMANENT,sizeof(my_source_mem));
+    cinfo->src = (struct jpeg_source_mgr*)(*cinfo->mem->alloc_small)((j_common_ptr) cinfo,
+                                                                     JPOOL_PERMANENT,sizeof(my_source_mem));
     src = (my_src_mptr) cinfo->src;
-    src->buffer = (JOCTET *)(*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_PERMANENT,INPUT_BUF_SIZE * sizeof(JOCTET));
+    src->buffer = (JOCTET *)(*cinfo->mem->alloc_small) ((j_common_ptr) cinfo,
+                                                        JPOOL_PERMANENT,INPUT_BUF_SIZE * sizeof(JOCTET));
   }
 
   src = (my_src_mptr) cinfo->src;
@@ -371,4 +373,4 @@ const CImg& save_jpeg_buffer(JOCTET *const buffer, unsigned int &buffer_size, co
 
 // End of the plug-in
 //-------------------
-#endif
+#endif /* cimg_plugin_jpeg_buffer */

@@ -80,15 +80,16 @@ CImg<floatT> get_flux(const CImgList<floatT> & grad,
           if (stop==1) continue;
 
           // Protection
-          if ((x+k<0) || (x+k>=width()) || (y+l<0) || (y+l>=height()) ||
-              (z+m<0) || (z+m>=depth()) || (k==0 && l==0 && m==0)) continue;
+          if ((x + k<0) || (x + k>=width()) || (y + l<0) || (y + l>=height()) ||
+              (z + m<0) || (z + m>=depth()) || (k==0 && l==0 && m==0)) continue;
           ++count;
 
           // Test if the point is in the interior
-          if ((*this)(x+k,y+l,z+m)==0) { stop = 1; continue; }
+          if ((*this)(x + k,y + l,z + m)==0) { stop = 1; continue; }
 
           // Compute the flux
-          f+=(grad(0,x+k,y+l,z+m)*k + grad(1,x+k,y+l,z+m)*l/sY + grad(2,x+k,y+l,z+m)*m/sZ)/std::sqrt((float)(k*k+l*l+m*m));
+          f+=(grad(0,x + k,y + l,z + m)*k + grad(1,x + k,y + l,z + m)*l/sY + grad(2,x + k,y + l,z + m)*m/sZ)/
+            std::sqrt((float)(k*k + l*l + m*m));
         }
 
     // Update
@@ -167,10 +168,10 @@ CImg<floatT> get_logdensity(const CImg<floatT> & dist,
       Fy = grad(1,p.pos[0],p.pos[1],p.pos[2]),
       Fz = grad(2,p.pos[0],p.pos[1],p.pos[2]);
 
-    logdensity(p.pos[0],p.pos[1],p.pos[2]) = logdensity.linear_atXYZ(p.pos[0]-Fx,p.pos[1]-Fy,p.pos[2]-Fz)
-      - 0.5f * (flux(p.pos[0],p.pos[1],p.pos[2])+flux.linear_atXYZ(p.pos[0]-Fx,p.pos[1]-Fy,p.pos[2]-Fz));
+    logdensity(p.pos[0],p.pos[1],p.pos[2]) = logdensity.linear_atXYZ(p.pos[0] - Fx,p.pos[1] - Fy,p.pos[2] - Fz)
+      - 0.5f * (flux(p.pos[0],p.pos[1],p.pos[2]) + flux.linear_atXYZ(p.pos[0] - Fx,p.pos[1] - Fy,p.pos[2] - Fz));
 
-    const float tmp = 1.0f - (1.0f-fabs(Fx)) * (1.0f-fabs(Fy)) * (1.0f-fabs(Fz));
+    const float tmp = 1.0f - (1.0f - std::fabs(Fx)) * (1.0f - std::fabs(Fy)) * (1.0f - std::fabs(Fz));
     if (tmp>delta) logdensity(p.pos[0],p.pos[1],p.pos[2])/=tmp;
     else if (delta<1) logdensity(p.pos[0],p.pos[1],p.pos[2]) = 0;
   }
@@ -197,8 +198,11 @@ CImg<floatT> get_corrected_flux(const CImg<floatT> & logdensity,
       Fx = grad(0,x,y,z),
       Fy = grad(1,x,y,z),
       Fz = grad(2,x,y,z);
-    corr_map(x,y,z) = (logdensity(x,y,z) - logdensity.linear_atXYZ(x-Fx,y-Fy,z-Fz)) * expf(logdensity(x,y,z) - 0.5f * delta) +
-      0.5f * ( flux.linear_atXYZ(x-Fx,y-Fy,z-Fz)*expf(logdensity.linear_atXYZ(x-Fx,y-Fy,z-Fz)) + flux(x,y,z)*expf(logdensity(x,y,z)));
+    corr_map(x,y,z) =
+      (logdensity(x,y,z) -
+       logdensity.linear_atXYZ(x - Fx,y - Fy,z - Fz)) * expf(logdensity(x,y,z) - 0.5f * delta) +
+      0.5f * ( flux.linear_atXYZ(x - Fx,y - Fy,z - Fz)*expf(logdensity.linear_atXYZ(x - Fx,y - Fy,z - Fz)) +
+               flux(x,y,z)*expf(logdensity(x,y,z)));
   }
 
   return corr_map;
@@ -223,30 +227,30 @@ bool _isSimple (const CImg<T> & img, int x, int y, int z ) const {
         if (x+k<0 || x+k>=img.width() || y+l<0 || y+l>=img.height()) continue;
 
         // Count the number of vertices
-        if (img(x+k,y+l)!=0 && !(k==0 && l==0)) {
+        if (img(x + k,y + l)!=0 && !(k==0 && l==0)) {
           ++V;
 
           // Count the number of edges
           for (int k1 = -1; k1<=1; ++k1)
             for (int l1 = -1; l1<=1; ++l1) {
               // Protection
-              if (x+k+k1<0 || x+k+k1>=img.width() || y+l+l1<0 || y+l+l1>=img.height()) continue;
+              if (x + k + k1<0 || x + k + k1>=img.width() || y + l + l1<0 || y + l + l1>=img.height()) continue;
 
-              if (!(k1==0 && l1==0) && img(x+k+k1,y+l+l1)!=0 && k+k1>-2 && l+l1>-2 &&
-                  k+k1<2 && l+l1<2 && !(k+k1==0 && l+l1==0))
+              if (!(k1==0 && l1==0) && img(x + k + k1,y + l + l1)!=0 && k + k1>-2 && l + l1>-2 &&
+                  k + k1<2 && l + l1<2 && !(k + k1==0 && l + l1==0))
                 ++E;
             }
         }
       }
 
     // Remove the corner if exists
-    if (x-1>=0 && y-1>=0 && img(x-1,y-1)!=0 && img(x,y-1)!=0 && img(x-1,y)!=0) E-=2;
-    if (x-1>=0 && y+1<img.height() && img(x-1,y+1)!=0 && img(x,y+1)!=0 && img(x-1,y)!=0) E-=2;
-    if (x+1<img.width() && y-1>=0 && img(x+1,y-1)!=0 && img(x,y-1)!=0 && img(x+1,y)!=0) E-=2;
-    if (x+1<img.width() && y+1<img.height() && img(x+1,y+1)!=0 && img(x,y+1)!=0 && img(x+1,y)!=0) E-=2;
+    if (x - 1>=0 && y - 1>=0 && img(x - 1,y - 1)!=0 && img(x,y - 1)!=0 && img(x - 1,y)!=0) E-=2;
+    if (x - 1>=0 && y + 1<img.height() && img(x - 1,y + 1)!=0 && img(x,y + 1)!=0 && img(x - 1,y)!=0) E-=2;
+    if (x + 1<img.width() && y - 1>=0 && img(x + 1,y - 1)!=0 && img(x,y - 1)!=0 && img(x + 1,y)!=0) E-=2;
+    if (x + 1<img.width() && y + 1<img.height() && img(x + 1,y + 1)!=0 && img(x,y + 1)!=0 && img(x + 1,y)!=0) E-=2;
 
     // Final return true if it is a tree (eg euler number equal to 1)
-    if ((V-E/2)==1) return true;
+    if ((V - E/2)==1) return true;
 
   } else  { // 3D case
     CImg<intT> visit(3,3,3,1,0); // Visitor table
@@ -262,33 +266,33 @@ bool _isSimple (const CImg<T> & img, int x, int y, int z ) const {
           int label = 0;
 
           // Protection
-          if (x+k<0 || x+k>=img.width() ||
-              y+l<0 || y+l>=img.height() ||
-              z+m<0 || z+m>=img.depth() ||
+          if (x + k<0 || x + k>=img.width() ||
+              y + l<0 || y + l>=img.height() ||
+              z + m<0 || z + m>=img.depth() ||
               (k==0 && l==0 && m==0)) continue;
 
-          if (visit(1+k,1+l,1+m)==0 && img(x+k,y+l,z+m)!=0) {
+          if (visit(1 + k,1 + l,1 + m)==0 && img(x + k,y + l,z + m)!=0) {
             // Look after the neightbor
             for (int k1 = -1; k1<=1; ++k1)
               for (int l1 = -1; l1<=1; ++l1)
                 for (int m1 = -1; m1<=1; ++m1) {
                   // Protection
-                  if (x+k+k1<0 || x+k+k1>=img.width() ||
-                      y+l+l1<0 || y+l+l1>=img.height() ||
-                      z+m+m1<0 || z+m+m1>=img.depth() ||
-                      k+k1>1   || k+k1<-1 ||
-                      l+l1>1   || l+l1<-1 ||
-                      m+m1>1   || m+m1<-1 ) continue;
+                  if (x + k + k1<0 || x + k + k1>=img.width() ||
+                      y + l + l1<0 || y + l + l1>=img.height() ||
+                      z + m + m1<0 || z + m + m1>=img.depth() ||
+                      k + k1>1 || k + k1<-1 ||
+                      l + l1>1 || l + l1<-1 ||
+                      m + m1>1 || m + m1<-1 ) continue;
 
                   // Search for a already knew component
-                  if (visit(1+k+k1,1+l+l1,1+m+m1)>0 &&
-                      img(x+k+k1,y+l+l1,z+m+m1)!=0) {
-                    if (label==0) label = visit(1+k+k1,1+l+l1,1+m+m1);
-                    else if (label!=visit(1+k+k1,1+l+l1,1+m+m1)) {
+                  if (visit(1 + k + k1,1 + l + l1,1 + m + m1)>0 &&
+                      img(x + k + k1,y + l + l1,z + m + m1)!=0) {
+                    if (label==0) label = visit(1 + k + k1,1 + l + l1,1 + m + m1);
+                    else if (label!=visit(1 + k + k1,1 + l + l1,1 + m + m1)) {
                       // Meld component
                       --C_asterix;
 
-                      int C = visit(1+k+k1,1+l+l1,1+m+m1);
+                      int C = visit(1 + k + k1,1 + l + l1,1 + m + m1);
                       cimg_forXYZ(visit,a,b,c) if (visit(a,b,c)==C) visit(a,b,c) = label;
                     }
                   }
@@ -299,8 +303,8 @@ bool _isSimple (const CImg<T> & img, int x, int y, int z ) const {
               // Find a new component
               ++C_asterix;
               ++count;
-              visit(1+k,1+l,1+m) = count;
-            } else visit(1+k,1+l,1+m) = label;
+              visit(1 + k ,1 + l,1 + m) = count;
+            } else visit(1 + k,1 + l,1 + m) = label;
           }
         }
 
@@ -316,62 +320,62 @@ bool _isSimple (const CImg<T> & img, int x, int y, int z ) const {
 
     // Look at X-axis
     for (int k = -1; k<=1; ++k) {
-      if (x+k<0 || x+k>=img.width()) continue;
+      if (x + k<0 || x + k>=img.width()) continue;
 
-      if (img(x+k,y,z)==0 && visit(1+k,1,1)==0) {
+      if (img(x + k,y,z)==0 && visit(1 + k,1,1)==0) {
         ++C_bar;
         ++count;
-        visit(1+k,1,1) = count;
+        visit(1 + k,1,1) = count;
 
         // Follow component
         for (int l = -1; l<=1; ++l) {
-          if (y+l<img.height() && y+l>=0 && img(x+k,y+l,z)==0 && visit(1+k,1+l,1)==0)
-            visit(1+k,1+l,1) = count;
-          if (z+l<img.depth() && z+l>=0 && img(x+k,y,z+l)==0 && visit(1+k,1,1+l)==0)
-            visit(1+k,1,1+l) = count;
+          if (y + l<img.height() && y + l>=0 && img(x + k,y + l,z)==0 && visit(1 + k,1 + l,1)==0)
+            visit(1 + k,1 + l,1) = count;
+          if (z + l<img.depth() && z + l>=0 && img(x + k,y,z + l)==0 && visit(1 + k,1,1 + l)==0)
+            visit(1 + k,1,1 + l) = count;
         }
       }
     }
 
     // Look at Y-axis
     for (int k = -1; k<=1; ++k) {
-      if (y+k<0 || y+k>=img.height()) continue;
+      if (y + k<0 || y + k>=img.height()) continue;
 
-      if (img(x,y+k,z)==0 && visit(1,1+k,1)==0) {
+      if (img(x,y + k,z)==0 && visit(1,1 + k,1)==0) {
         int label = 0;
         ++C_bar;
         ++count;
-        visit(1,1+k,1) = count;
+        visit(1,1 + k,1) = count;
         label = count;
 
         // Follow component
         for (int l = -1; l<=1; ++l) {
           if (l==0) continue;
 
-          if (x+l<img.width() && x+l>=0 && img(x+l,y+k,z)==0) {
-            if (visit(1+l,1+k,1)!=0) {
-              if (label!=visit(1+l,1+k,1)) {
+          if (x + l<img.width() && x + l>=0 && img(x + l,y + k,z)==0) {
+            if (visit(1 + l,1 + k,1)!=0) {
+              if (label!=visit(1 + l,1 + k,1)) {
                 // Meld component
                 --C_bar;
 
-                int C = visit(1+l,1+k,1);
+                int C = visit(1 + l,1 + k,1);
                 cimg_forXYZ(visit,a,b,c)
                   if (visit(a,b,c)==C) visit(a,b,c) = label;
               }
-            } else visit(1+l,1+k,1) = label;
+            } else visit(1 + l,1 + k,1) = label;
           }
 
-          if (z+l<img.depth() && z+l>=0 && img(x,y+k,z+l)==0) {
-            if (visit(1,1+k,1+l)!=0) {
-              if (label!=visit(1,1+k,1+l)) {
+          if (z + l<img.depth() && z + l>=0 && img(x,y + k,z + l)==0) {
+            if (visit(1,1 + k,1 + l)!=0) {
+              if (label!=visit(1,1 + k,1 + l)) {
                 // Meld component
                 --C_bar;
 
-                int C = visit(1,1+k,1+l);
+                int C = visit(1,1 + k,1 + l);
                 cimg_forXYZ(visit,a,b,c)
                   if (visit(a,b,c)==C) visit(a,b,c) = label;
               }
-            } else visit(1,1+k,1+l) = label;
+            } else visit(1,1 + k,1 + l) = label;
           }
         }
       }
@@ -379,43 +383,43 @@ bool _isSimple (const CImg<T> & img, int x, int y, int z ) const {
 
     // Look at Z-axis
     for (int k = -1; k<=1; ++k) {
-      if (z+k<0 || z+k>=img.depth()) continue;
+      if (z + k<0 || z + k>=img.depth()) continue;
 
-      if (img(x,y,z+k)==0 && visit(1,1,1+k)==0) {
+      if (img(x,y,z + k)==0 && visit(1,1,1 + k)==0) {
         int label = 0;
         ++C_bar;
         ++count;
-        visit(1,1,1+k) = count;
+        visit(1,1,1 + k) = count;
         label = count;
 
         // Follow component
         for (int l = -1; l<=1; ++l) {
           if (l==0) continue;
 
-          if (x+l<img.width() && x+l>=0 && img(x+l,y,z+k)==0) {
-            if (visit(1+l,1,1+k)!=0) {
-              if (label!=visit(1+l,1,1+k)) {
+          if (x + l<img.width() && x + l>=0 && img(x + l,y,z + k)==0) {
+            if (visit(1 + l,1,1 + k)!=0) {
+              if (label!=visit(1 + l,1,1 + k)) {
                 // Meld component
                 --C_bar;
 
-                int C = visit(1+l,1,1+k);
+                int C = visit(1 + l,1,1 + k);
                 cimg_forXYZ(visit,a,b,c)
                   if (visit(a,b,c)==C) visit(a,b,c) = label;
               }
-            } else visit(1+l,1,1+k) = label;
+            } else visit(1 + l,1,1 + k) = label;
           }
 
-          if (y+l<img.height() && y+l>=0 && img(x,y+l,z+k)==0) {
-            if (visit(1,1+l,1+k)!=0) {
-              if (label!=visit(1,1+l,1+k)) {
+          if (y + l<img.height() && y + l>=0 && img(x,y + l,z + k)==0) {
+            if (visit(1,1 + l,1 + k)!=0) {
+              if (label!=visit(1,1 + l,1 + k)) {
                 // Meld component
                 --C_bar;
 
-                int C = visit(1,1+l,1+k);
+                int C = visit(1,1 + l,1 + k);
                 cimg_forXYZ(visit,a,b,c)
                   if (visit(a,b,c)==C) visit(a,b,c) = label;
               }
-            } else visit(1,1+l,1+k) = label;
+            } else visit(1,1 + l,1 + k) = label;
           }
         }
       }
@@ -442,27 +446,28 @@ bool _isEndPoint(const CImg<T> & img, const CImg<T> & label,
 
   if ((!curve) && (img.depth()!=1)) { // 3D case with medial surface
     // Use Pudney specification with the 9 plans
-    const int plan9 [9][8][3] = { { {-1,0,-1}, {0,0,-1}, {1,0,-1}, {-1,0,0}, {1,0,0}, {-1,0,1}, {0,0,1}, {1,0,1} }, // Plan 1
-                                  { {-1,1,0}, {0,1,0}, {1,1,0}, {-1,0,0}, {1,0,0}, {-1,-1,0}, {0,-1,0}, {1,-1,0} }, // Plan 2
-                                  { {0,-1,-1}, {0,0,-1}, {0,1,-1}, {0,-1,0}, {0,1,0}, {0,-1,1}, {0,0,1}, {0,1,1} }, // Plan 3
-                                  { {1,1,1}, {0,1,0}, {-1,1,-1}, {1,0,1}, {-1,0,-1}, {-1,-1,-1}, {0,-1,0}, {1,-1,1} }, // Plan 4
-                                  { {-1,1,1}, {0,1,0}, {1,1,-1}, {-1,0,1}, {1,0,-1}, {-1,-1,1}, {0,-1,0}, {1,-1,-1} }, // Plan 5
-                                  { {-1,1,1}, {0,1,1}, {1,1,1}, {-1,0,0}, {1,0,0}, {-1,-1,-1}, {0,-1,-1}, {1,-1,-1} }, // Plan 6
-                                  { {-1,1,-1}, {0,1,-1}, {1,1,-1}, {-1,0,0}, {1,0,0}, {-1,-1,1}, {0,-1,1}, {1,-1,1} }, // Plan 7
-                                  { {-1,1,-1}, {-1,1,0}, {-1,1,1}, {0,0,-1}, {0,0,1}, {1,-1,-1}, {1,-1,0}, {1,-1,1} }, // Plan 8
-                                  { {1,1,-1}, {1,1,0}, {1,1,1}, {0,0,-1}, {0,0,1}, {-1,-1,-1}, {-1,-1,0}, {-1,-1,1} }  // Plan 9
-    };
+    const int plan9 [9][8][3] =
+      { { {-1,0,-1}, {0,0,-1}, {1,0,-1}, {-1,0,0}, {1,0,0}, {-1,0,1}, {0,0,1}, {1,0,1} }, // Plan 1
+        { {-1,1,0}, {0,1,0}, {1,1,0}, {-1,0,0}, {1,0,0}, {-1,-1,0}, {0,-1,0}, {1,-1,0} }, // Plan 2
+        { {0,-1,-1}, {0,0,-1}, {0,1,-1}, {0,-1,0}, {0,1,0}, {0,-1,1}, {0,0,1}, {0,1,1} }, // Plan 3
+        { {1,1,1}, {0,1,0}, {-1,1,-1}, {1,0,1}, {-1,0,-1}, {-1,-1,-1}, {0,-1,0}, {1,-1,1} }, // Plan 4
+        { {-1,1,1}, {0,1,0}, {1,1,-1}, {-1,0,1}, {1,0,-1}, {-1,-1,1}, {0,-1,0}, {1,-1,-1} }, // Plan 5
+        { {-1,1,1}, {0,1,1}, {1,1,1}, {-1,0,0}, {1,0,0}, {-1,-1,-1}, {0,-1,-1}, {1,-1,-1} }, // Plan 6
+        { {-1,1,-1}, {0,1,-1}, {1,1,-1}, {-1,0,0}, {1,0,0}, {-1,-1,1}, {0,-1,1}, {1,-1,1} }, // Plan 7
+        { {-1,1,-1}, {-1,1,0}, {-1,1,1}, {0,0,-1}, {0,0,1}, {1,-1,-1}, {1,-1,0}, {1,-1,1} }, // Plan 8
+        { {1,1,-1}, {1,1,0}, {1,1,1}, {0,0,-1}, {0,0,1}, {-1,-1,-1}, {-1,-1,0}, {-1,-1,1} }  // Plan 9
+      };
 
     // Count the number of neighbors on each plan
     for (int k = 0; k<9; ++k) {
       int count = 0;
 
       for (int l = 0; l<8; ++l) {
-        if (x+plan9[k][l][0]<0 || x+plan9[k][l][0]>=img.width() ||
-            y+plan9[k][l][1]<0 || y+plan9[k][l][1]>=img.height() ||
-            z+plan9[k][l][2]<0 || z+plan9[k][l][2]>=img.depth()) continue;
+        if (x + plan9[k][l][0]<0 || x + plan9[k][l][0]>=img.width() ||
+            y + plan9[k][l][1]<0 || y + plan9[k][l][1]>=img.height() ||
+            z + plan9[k][l][2]<0 || z + plan9[k][l][2]>=img.depth()) continue;
 
-        if (img(x+plan9[k][l][0],y+plan9[k][l][1],z+plan9[k][l][2])!=0) ++count;
+        if (img(x + plan9[k][l][0],y + plan9[k][l][1],z + plan9[k][l][2])!=0) ++count;
       }
 
       if (count<2) return true;
@@ -474,10 +479,11 @@ bool _isEndPoint(const CImg<T> & img, const CImg<T> & label,
       for (int l = -1; l<=1; ++l)
         for (int m = -1; m<=1; ++m) {
           // Protection
-          if (x+k<0 || x+k>=img.width() || y+l<0 || y+l>=img.height() ||
-              z+m<0 || z+m>=img.depth()) continue;
+          if (x + k<0 || x + k>=img.width() ||
+              y + l<0 || y + l>=img.height() ||
+              z + m<0 || z + m>=img.depth()) continue;
 
-          if (img(x+k,y+l,z+m)!=0) ++isb;
+          if (img(x + k,y + l,z + m)!=0) ++isb;
         }
 
     if (isb==2) return true; // The pixel with one neighbor
@@ -514,9 +520,10 @@ CImg<T> get_skeleton (const CImg<floatT> & flux,
       for (int l = -1; l<=1; ++l)
         for (int m = -1; m<=1; ++m) {
           // Protection
-          if (x+k<0 || x+k>=width() || y+l<0 || y+l>=height() ||
-              z+m<0 || z+m>=depth()) continue;
-          if (skeleton(x+k,y+l,z+m)==0) isb = 1;
+          if (x + k<0 || x + k>=width() ||
+              y + l<0 || y + l>=height() ||
+              z + m<0 || z + m>=depth()) continue;
+          if (skeleton(x + k,y + l,z + m)==0) isb = 1;
         }
 
     if (isb==1 && _isSimple(skeleton,x,y,z)) {
@@ -546,20 +553,20 @@ CImg<T> get_skeleton (const CImg<floatT> & flux,
           for (int l = -1; l<=1; ++l)
             for (int m = -1; m<=1; ++m) {
               // Protection
-              if (p.pos[0]+k < 0 || p.pos[0]+k >= width() ||
-                  p.pos[1]+l < 0 || p.pos[1]+l >= height() ||
-                  p.pos[2]+m < 0 || p.pos[2]+m >= depth()) continue;
-              if (skeleton(p.pos[0]+k,p.pos[1]+l,p.pos[2]+m)!=0 &&
-                  count(p.pos[0]+k,p.pos[1]+l,p.pos[2]+m)<1 &&
-                  _isSimple(skeleton,p.pos[0]+k,p.pos[1]+l,p.pos[2]+m)) {
+              if (p.pos[0] + k<0 || p.pos[0] + k>= width() ||
+                  p.pos[1] + l<0 || p.pos[1] + l>= height() ||
+                  p.pos[2] + m<0 || p.pos[2] + m>= depth()) continue;
+              if (skeleton(p.pos[0] + k,p.pos[1] + l,p.pos[2] + m)!=0 &&
+                  count(p.pos[0] + k,p.pos[1] + l,p.pos[2] + m)<1 &&
+                  _isSimple(skeleton,p.pos[0] + k,p.pos[1] + l,p.pos[2] + m)) {
                 _PointFlux p1;
-                p1.pos[0] = p.pos[0]+k;
-                p1.pos[1] = p.pos[1]+l;
-                p1.pos[2] = p.pos[2]+m;
-                p1.flux = flux(p.pos[0]+k,p.pos[1]+l,p.pos[2]+m);
-                p1.dist = dist(p.pos[0]+k,p.pos[1]+l,p.pos[2]+m);
+                p1.pos[0] = p.pos[0] + k;
+                p1.pos[1] = p.pos[1] + l;
+                p1.pos[2] = p.pos[2] + m;
+                p1.flux = flux(p.pos[0] + k,p.pos[1] + l,p.pos[2] + m);
+                p1.dist = dist(p.pos[0] + k,p.pos[1] + l,p.pos[2] + m);
                 pqueue.push(p1);
-                count(p.pos[0]+k,p.pos[1]+l,p.pos[2]+m) = 1;
+                count(p.pos[0] + k,p.pos[1] + l,p.pos[2] + m) = 1;
               }
             }
       } else label(p.pos[0],p.pos[1],p.pos[2]) = 1; // Mark the point as skeletal
@@ -577,4 +584,4 @@ CImg<T> skeleton(const CImg<floatT> & flux,
   return get_skeleton(flux,dist,curve,thres).move_to(*this);
 }
 
-#endif /* cimg_skeleton_plugin */
+#endif /* cimg_plugin_skeleton */

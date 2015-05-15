@@ -100,4 +100,4 @@ template<typename tf, typename tc, typename to>
   return *this;
 }
 
-#endif
+#endif /* cimg_plugin_vtk */
